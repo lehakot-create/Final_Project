@@ -63,3 +63,62 @@ class Machine(models.Model):
     equipment = models.CharField(max_length=128)  # Комплектация (доп. опции)
     # client = models.ForeignKey('', on_delete=models.DO_NOTHING)  # Клиент
     # service_company = models.ForeignKey('', on_delete=models.DO_NOTHING)  # Сервисная компания
+
+
+class TypeMaintenance(models.Model):
+    """
+    Вид ТО
+    """
+    name = models.CharField(max_length=128)
+    description = models.CharField(max_length=128)
+
+
+class Maintenance(models.Model):
+    """
+    Техническое обслуживание
+    """
+    machine = models.ForeignKey('Machine', on_delete=models.DO_NOTHING)
+    type_maintenance = models.ForeignKey('TypeMaintenance', on_delete=models.DO_NOTHING)  # Вид ТО
+    date_maintenance = models.DateField()  # Дата проведения ТО
+    operating_time = models.PositiveIntegerField()  # Наработка, м/час
+    work_order = models.CharField(max_length=128)  # заказ-наряд
+    date_work_order = models.DateField()  # дата заказ-наряда
+    # service_company = models.ForeignKey('', on_delete=models.DO_NOTHING)  # Сервисная компания
+
+
+class RecoveryMethod(models.Model):
+    """
+    Способ восстановления
+    """
+    name = models.CharField(max_length=128)
+    description = models.CharField(max_length=128)
+
+
+class FailureNode(models.Model):
+    """
+    Узел отказа
+    """
+    name = models.CharField(max_length=128)
+    description = models.CharField(max_length=128)
+
+
+class Claims(models.Model):
+    """
+    Рекламации
+    """
+    machine = models.ForeignKey('Machine', on_delete=models.DO_NOTHING)
+    date_of_rejection = models.DateField()  # Дата отказа
+    operating_time = models.PositiveIntegerField()  # Наработка, м/час
+    failure_node = models.ForeignKey('FailureNode', on_delete=models.DO_NOTHING)  # Узел отказа
+    description_failure = models.CharField(max_length=128)  # Описание отказа
+    recovery_method = models.ForeignKey('RecoveryMethod', on_delete=models.DO_NOTHING)  # Способ восстановления
+    used_spare_parts = models.CharField(max_length=512)  # Используемые запасные части
+    date_recovery = models.DateField()  # Дата восстановления
+    machine_downtime = models.PositiveIntegerField()  # Время простоя техники
+    # service_company = models.ForeignKey('', on_delete=models.DO_NOTHING)  # Сервисная компания
+
+    def save(self, instance, *args, **kwargs):
+        """
+        Производим подсчет времени простоя
+        """
+        super().save(instance, *args, **kwargs)
