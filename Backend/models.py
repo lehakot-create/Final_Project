@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -8,6 +9,10 @@ class ModelsMachine(models.Model):
     name = models.CharField(max_length=128)
     description = models.CharField(max_length=128)
 
+    class Meta:
+        verbose_name = 'Модель техники'
+        verbose_name_plural = 'Модели техники'
+
 
 class ModelsEngine(models.Model):
     """
@@ -15,6 +20,10 @@ class ModelsEngine(models.Model):
     """
     name = models.CharField(max_length=128)
     description = models.CharField(max_length=128)
+
+    class Meta:
+        verbose_name = 'Модель двигателя'
+        verbose_name_plural = 'Модели двигателя'
 
 
 class ModelsTransmission(models.Model):
@@ -24,6 +33,10 @@ class ModelsTransmission(models.Model):
     name = models.CharField(max_length=128)
     description = models.CharField(max_length=128)
 
+    class Meta:
+        verbose_name = 'Модель трансмиссии'
+        verbose_name_plural = 'Модели трансмиссии'
+
 
 class ModelsDriveAxle(models.Model):
     """
@@ -32,6 +45,10 @@ class ModelsDriveAxle(models.Model):
     name = models.CharField(max_length=128)
     description = models.CharField(max_length=128)
 
+    class Meta:
+        verbose_name = 'Модель ведущего моста'
+        verbose_name_plural = 'Модели ведущего моста'
+
 
 class ModelsSteeringBridge(models.Model):
     """
@@ -39,6 +56,22 @@ class ModelsSteeringBridge(models.Model):
     """
     name = models.CharField(max_length=128)
     description = models.CharField(max_length=128)
+
+    class Meta:
+        verbose_name = 'Модель управляемого моста'
+        verbose_name_plural = 'Модели управляемого моста'
+
+
+class ServiceCompany(models.Model):
+    """
+    Модель сервисная компания
+    """
+    name = models.CharField(max_length=128)
+    description = models.CharField(max_length=128)
+
+    class Meta:
+        verbose_name = 'Модель сервисная компания'
+        verbose_name_plural = 'Модели сервисной компании'
 
 
 class Machine(models.Model):
@@ -61,8 +94,12 @@ class Machine(models.Model):
     consumer = models.CharField(max_length=128)  # Грузополучатель (конечный потребитель)
     delivery_address = models.CharField(max_length=128)  # Адрес поставки (эксплуатации)
     equipment = models.CharField(max_length=128)  # Комплектация (доп. опции)
-    # client = models.ForeignKey('', on_delete=models.DO_NOTHING)  # Клиент
-    # service_company = models.ForeignKey('', on_delete=models.DO_NOTHING)  # Сервисная компания
+    client = models.ForeignKey(User, on_delete=models.DO_NOTHING)  # Клиент
+    service_company = models.ForeignKey('ServiceCompany', on_delete=models.DO_NOTHING)  # Сервисная компания
+
+    class Meta:
+        verbose_name = 'Машина'
+        verbose_name_plural = 'Машины'
 
 
 class TypeMaintenance(models.Model):
@@ -71,6 +108,10 @@ class TypeMaintenance(models.Model):
     """
     name = models.CharField(max_length=128)
     description = models.CharField(max_length=128)
+
+    class Meta:
+        verbose_name = 'Вид ТО'
+        verbose_name_plural = 'Виды ТО'
 
 
 class Maintenance(models.Model):
@@ -83,7 +124,11 @@ class Maintenance(models.Model):
     operating_time = models.PositiveIntegerField()  # Наработка, м/час
     work_order = models.CharField(max_length=128)  # заказ-наряд
     date_work_order = models.DateField()  # дата заказ-наряда
-    # service_company = models.ForeignKey('', on_delete=models.DO_NOTHING)  # Сервисная компания
+    service_company = models.ForeignKey('ServiceCompany', on_delete=models.DO_NOTHING)  # Сервисная компания
+
+    class Meta:
+        verbose_name = 'Техническое обслуживание'
+        verbose_name_plural = 'Технические обслуживания'
 
 
 class RecoveryMethod(models.Model):
@@ -93,6 +138,10 @@ class RecoveryMethod(models.Model):
     name = models.CharField(max_length=128)
     description = models.CharField(max_length=128)
 
+    class Meta:
+        verbose_name = 'Способ восстановления'
+        verbose_name_plural = 'Способы восстановления'
+
 
 class FailureNode(models.Model):
     """
@@ -100,6 +149,10 @@ class FailureNode(models.Model):
     """
     name = models.CharField(max_length=128)
     description = models.CharField(max_length=128)
+
+    class Meta:
+        verbose_name = 'Узел отказа'
+        verbose_name_plural = 'Узлы отказа'
 
 
 class Claims(models.Model):
@@ -115,7 +168,11 @@ class Claims(models.Model):
     used_spare_parts = models.CharField(max_length=512)  # Используемые запасные части
     date_recovery = models.DateField()  # Дата восстановления
     machine_downtime = models.PositiveIntegerField()  # Время простоя техники
-    # service_company = models.ForeignKey('', on_delete=models.DO_NOTHING)  # Сервисная компания
+    service_company = models.ForeignKey('ServiceCompany', on_delete=models.DO_NOTHING)  # Сервисная компания
+
+    class Meta:
+        verbose_name = 'Рекламации'
+        verbose_name_plural = 'Рекламации'
 
     def save(self, instance, *args, **kwargs):
         """
