@@ -7,7 +7,7 @@ class ModelsMachine(models.Model):
     Модель техники
     """
     name = models.CharField(max_length=128)
-    description = models.CharField(max_length=128)
+    description = models.CharField(max_length=512)
 
     class Meta:
         verbose_name = 'Модель техники'
@@ -167,15 +167,15 @@ class Claims(models.Model):
     recovery_method = models.ForeignKey('RecoveryMethod', on_delete=models.DO_NOTHING)  # Способ восстановления
     used_spare_parts = models.CharField(max_length=512)  # Используемые запасные части
     date_recovery = models.DateField()  # Дата восстановления
-    machine_downtime = models.PositiveIntegerField()  # Время простоя техники
+    machine_downtime = models.PositiveIntegerField(null=True)  # Время простоя техники
     service_company = models.ForeignKey('ServiceCompany', on_delete=models.DO_NOTHING)  # Сервисная компания
 
     class Meta:
         verbose_name = 'Рекламации'
         verbose_name_plural = 'Рекламации'
 
-    def save(self, instance, *args, **kwargs):
-        """
-        Производим подсчет времени простоя
-        """
-        super().save(instance, *args, **kwargs)
+    # def save(self, instance, *args, **kwargs):
+    #     """
+    #     Производим подсчет времени простоя
+    #     """
+    #     super().save(instance, *args, **kwargs)
