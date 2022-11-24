@@ -5,129 +5,118 @@ from Backend.models import ModelsMachine, ModelsEngine, ModelsTransmission, \
     ModelsDriveAxle, ModelsSteeringBridge, ServiceCompany, Machine, \
     TypeMaintenance, Maintenance, RecoveryMethod, FailureNode, Claims
 
+from .models_machine import models_machine
+from .models_engine import models_engine
+from .models_transmission import models_transmission
+from .models_drive_axle import models_drive_axle
+from .models_steering_bridge import models_steering_bridge
+from .models_client import models_client
+from .models_service_company import models_service_company
+from .machine import machine
+
 
 def create_models_machine():
-    ModelsMachine.objects.create(
-        name='Дизельный погрузчик VP D15',
-        description="Дисковые тормоза в масляной ванне - СТАНДАРТ для всех погрузчиков VP. Их ресурс более 7 000 "
-                    "моточасов. У обычных барабанных максимум 1 000. И никаких промежуточных регулировок."
-    )
-    ModelsMachine.objects.create(
-        name='Газобензиновый погрузчик VP G15',
-        description="Зачастую газовое оборудование на бензиновые погрузчики устанавливают небольшие мастерские с "
-                    "использованием дешевых компонентов. Двигатели NISSAN поступают к нам на конвейер с "
-                    "премиум-оборудованием IMPCO, установленным в Японии в заводских условиях.."
-    )
-    ModelsMachine.objects.create(
-        name='Электропогрузчик VP E15',
-        description="При повороте два электромотора вращают колеса электропогрузчика VP серии Е навстречу "
-                    "друг другу. По сравнению с обычными погрузчиками с одним двигателем, они разворачиваются "
-                    "буквально на пятачке."
-    )
+    for value in models_machine:
+        ModelsMachine.objects.create(
+            name=value.get('name'),
+            description=value.get('description')
+        )
     print('Созданы записи в БД: модели машин')
 
 
 def create_models_engine():
-    ModelsEngine.objects.create(
-        name='Двигатель 1',
-        description='Описание двигателя 1'
-    )
-    ModelsEngine.objects.create(
-        name='Двигатель 2',
-        description='Описание двигателя 2'
-    )
-    ModelsEngine.objects.create(
-        name='Двигатель 3',
-        description='Описание двигателя 3'
-    )
+    for value in models_engine:
+        ModelsEngine.objects.create(
+            name=value.get('name'),
+            description=value.get('description')
+        )
     print('Созданы записи в БД: модели двигателей')
 
 
 def create_models_transmission():
-    ModelsTransmission.objects.create(
-        name='Трансмиссия 1',
-        description='Описание трансмиссии 1'
-    )
-    ModelsTransmission.objects.create(
-        name='Трансмиссия 2',
-        description='Описание трансмиссии 2'
-    )
-    ModelsTransmission.objects.create(
-        name='Трансмиссия 3',
-        description='Описание трансмиссии 3'
-    )
+    for value in models_transmission:
+        ModelsTransmission.objects.create(
+            name=value.get('name'),
+            description=value.get('description')
+        )
     print('Созданы записи в БД: модели трансмиссии')
 
 
 def create_models_drive_axle():
-    ModelsDriveAxle.objects.create(
-        name='Ведущий мост 1',
-        description='Описание ведущего моста 1'
-    )
-    ModelsDriveAxle.objects.create(
-        name='Ведущий мост 2',
-        description='Описание ведущего моста 2'
-    )
-    ModelsDriveAxle.objects.create(
-        name='Ведущий мост 3',
-        description='Описание ведущего моста 3'
-    )
+    for value in models_drive_axle:
+        ModelsDriveAxle.objects.create(
+            name=value.get('name'),
+            description=value.get('description')
+        )
     print('Созданы записи в БД: модели ведущего моста')
 
 
 def create_models_steering_bridge():
-    ModelsSteeringBridge.objects.create(
-        name='Управляемый мост 1',
-        description='Описание управляемого моста 1'
-    )
-    ModelsSteeringBridge.objects.create(
-        name='Управляемый мост 2',
-        description='Описание управляемого моста 2'
-    )
-    ModelsSteeringBridge.objects.create(
-        name='Управляемый мост 3',
-        description='Описание управляемого моста 3'
-    )
+    for value in models_steering_bridge:
+        ModelsSteeringBridge.objects.create(
+            name=value.get('name'),
+            description=value.get('description')
+        )
     print('Созданы записи в БД: модели управляемого моста')
 
 
+def create_models_client():
+    for value in models_client:
+        User.objects.create(
+            username=value.get('username')
+        )
+    print('Созданы записи в БД: модели клиентов')
+
+
 def create_models_service_company():
-    ServiceCompany.objects.create(
-        name='Сервисная компания 1',
-        description='Описание сервисной компании 1'
-    )
-    ServiceCompany.objects.create(
-        name='Сервисная компания 2',
-        description='Описание сервисной компании 2'
-    )
-    ServiceCompany.objects.create(
-        name='Сервисная компания 3',
-        description='Описание сервисной компании 3'
-    )
+    for value in models_service_company:
+        ServiceCompany.objects.create(
+            name=value.get('name'),
+            description=value.get('description')
+        )
     print('Созданы записи в БД: модели сервисной компании')
 
 
 def create_machine():
-    User.objects.create(username='user')
-    Machine.objects.create(
-        factory_number_machine="d76q3r4qwqwd",
-        models_machine=ModelsMachine.objects.get(id=1),
-        models_engine=ModelsEngine.objects.get(id=1),
-        factory_number_engine="fa76qwdha",
-        model_transmission=ModelsTransmission.objects.get(id=1),
-        factory_number_transmission="awf67euiyfac",
-        models_drive_axle=ModelsDriveAxle.objects.get(id=1),
-        factory_number_drive_axle="af8792tljfag",
-        models_steering_bridge=ModelsSteeringBridge.objects.get(id=1),
-        factory_number_steering_bridge="aso8iqkwva",
-        supply_contract="Договор поставки №123 от 11.11.2022",
-        date_of_shipment="2022-11-11",
-        consumer='Иванов Иван Иваныч',
-        delivery_address='На деревню бабушке',
-        equipment='Полный фарш',
-        client=User.objects.get(id=1),
-        service_company=ServiceCompany.objects.get(id=1)
-    )
+    for value in machine:
+        Machine.objects.create(
+            models_machine=ModelsMachine.objects.get(name=value.get('models_machine')),
+            factory_number_machine=value.get('factory_number_machine'),
+            models_engine=ModelsEngine.objects.get(name=value.get('models_engine')),
+            factory_number_engine=value.get('factory_number_engine'),
+            model_transmission=ModelsTransmission.objects.get(name=value.get('model_transmission')),
+            factory_number_transmission=value.get('factory_number_transmission'),
+            models_drive_axle=ModelsDriveAxle.objects.get(name=value.get('models_drive_axle')),
+            factory_number_drive_axle=value.get('factory_number_drive_axle'),
+            models_steering_bridge=ModelsSteeringBridge.objects.get(name=value.get('models_steering_bridge')),
+            factory_number_steering_bridge=value.get('models_drive_axle'),
+            date_of_shipment=value.get('date_of_shipment'),
+            client=User.objects.get(username=value.get('client')),
+            consumer=value.get('consumer'),
+            delivery_address=value.get('delivery_address'),
+            equipment=value.get('equipment'),
+            service_company=ServiceCompany.objects.get(name=value.get('service_company'))
+        )
+    # User.objects.create(username='user')
+    # Machine.objects.create(
+    #     factory_number_machine="d76q3r4qwqwd",
+    #     models_machine=ModelsMachine.objects.get(id=1),
+    #     models_engine=ModelsEngine.objects.get(id=1),
+    #     factory_number_engine="fa76qwdha",
+    #     model_transmission=ModelsTransmission.objects.get(id=1),
+    #     factory_number_transmission="awf67euiyfac",
+    #     models_drive_axle=ModelsDriveAxle.objects.get(id=1),
+    #     factory_number_drive_axle="af8792tljfag",
+    #     models_steering_bridge=ModelsSteeringBridge.objects.get(id=1),
+    #     factory_number_steering_bridge="aso8iqkwva",
+    #     supply_contract="Договор поставки №123 от 11.11.2022",
+    #     date_of_shipment="2022-11-11",
+    #     consumer='Иванов Иван Иваныч',
+    #     delivery_address='На деревню бабушке',
+    #     equipment='Полный фарш',
+    #     client=User.objects.get(id=1),
+    #     service_company=ServiceCompany.objects.get(id=1)
+    # )
     print('Созданы записи в БД: запись о конкретной машине')
 
 
@@ -211,14 +200,21 @@ class Command(BaseCommand):
     help = 'Заполняем БД'
 
     def handle(self, *args, **options):
-        lst_func = [create_models_machine, create_models_engine, create_models_transmission,
-                    create_models_drive_axle, create_models_steering_bridge, create_models_service_company,
-                    # create_machine,
-                    create_type_mainrenance,
-                    create_maintenance,
-                    create_recovery_method,
-                    create_failure_node,
-                    create_claims]
+        lst_func = [
+            create_models_machine,
+            create_models_engine,
+            create_models_transmission,
+            create_models_drive_axle,
+            create_models_steering_bridge,
+            create_models_service_company,
+            create_models_client,
+            create_machine,
+            # create_type_mainrenance,
+            # create_maintenance,
+            # create_recovery_method,
+            # create_failure_node,
+            # create_claims
+        ]
         for func in lst_func:
             try:
                 func()

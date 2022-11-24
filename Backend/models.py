@@ -93,7 +93,7 @@ class Machine(models.Model):
     date_of_shipment = models.DateField()  # Дата отгрузки с завода
     consumer = models.CharField(max_length=128)  # Грузополучатель (конечный потребитель)
     delivery_address = models.CharField(max_length=128)  # Адрес поставки (эксплуатации)
-    equipment = models.CharField(max_length=128)  # Комплектация (доп. опции)
+    equipment = models.CharField(max_length=512)  # Комплектация (доп. опции)
     client = models.ForeignKey(User, on_delete=models.DO_NOTHING)  # Клиент
     service_company = models.ForeignKey('ServiceCompany', on_delete=models.DO_NOTHING)  # Сервисная компания
 
