@@ -1,3 +1,8 @@
+import csv
+import datetime
+import os
+
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand, CommandError
 
@@ -13,6 +18,7 @@ from .models_steering_bridge import models_steering_bridge
 from .models_client import models_client
 from .models_service_company import models_service_company
 from .machine import machine
+from .models_type_maintenance import models_type_maintenance
 
 
 def create_models_machine():
@@ -97,55 +103,35 @@ def create_machine():
             equipment=value.get('equipment'),
             service_company=ServiceCompany.objects.get(name=value.get('service_company'))
         )
-    # User.objects.create(username='user')
-    # Machine.objects.create(
-    #     factory_number_machine="d76q3r4qwqwd",
-    #     models_machine=ModelsMachine.objects.get(id=1),
-    #     models_engine=ModelsEngine.objects.get(id=1),
-    #     factory_number_engine="fa76qwdha",
-    #     model_transmission=ModelsTransmission.objects.get(id=1),
-    #     factory_number_transmission="awf67euiyfac",
-    #     models_drive_axle=ModelsDriveAxle.objects.get(id=1),
-    #     factory_number_drive_axle="af8792tljfag",
-    #     models_steering_bridge=ModelsSteeringBridge.objects.get(id=1),
-    #     factory_number_steering_bridge="aso8iqkwva",
-    #     supply_contract="Договор поставки №123 от 11.11.2022",
-    #     date_of_shipment="2022-11-11",
-    #     consumer='Иванов Иван Иваныч',
-    #     delivery_address='На деревню бабушке',
-    #     equipment='Полный фарш',
-    #     client=User.objects.get(id=1),
-    #     service_company=ServiceCompany.objects.get(id=1)
-    # )
     print('Созданы записи в БД: запись о конкретной машине')
 
 
 def create_type_mainrenance():
-    TypeMaintenance.objects.create(
-        name='ТО 1',
-        description='Описание ТО 1'
-    )
-    TypeMaintenance.objects.create(
-        name='ТО 2',
-        description='Описание ТО 2'
-    )
-    TypeMaintenance.objects.create(
-        name='ТО 3',
-        description='Описание ТО 3'
-    )
+    for value in models_type_maintenance:
+        TypeMaintenance.objects.create(
+            name=value.get('name'),
+            description=value.get('description')
+        )
     print('Созданы записи в БД: модели ТО')
 
 
 def create_maintenance():
-    Maintenance.objects.create(
-        machine=Machine.objects.get(id=1),
-        type_maintenance=TypeMaintenance.objects.get(id=1),
-        date_maintenance="2022-11-13",
-        operating_time=3000,
-        work_order=123,
-        date_work_order="2022-11-13",
-        service_company=ServiceCompany.objects.get(id=1)
-    )
+    path = os.path.join(settings.BASE_DIR, 'Backend/management/commands')
+
+    with open(os.path.join(path, 'data.csv'), newline='', encoding='utf-8-sig') as csvfile:
+        data = csv.DictReader(csvfile)
+        for el in data:
+            print(el)
+            print(el.get('factory_number_machine'))
+            Maintenance.objects.create(
+                machine=Machine.objects.get(factory_number_machine=el.get('factory_number_machine')),
+                type_maintenance=TypeMaintenance.objects.get(name=el.get('type_maintenance')),
+                date_maintenance=datetime.datetime.strptime(el.get('date_maintenance'), '%m-%d-%y').date(),
+                operating_time=el.get('operating_time'),
+                work_order=el.get('work_order'),
+                date_work_order=datetime.datetime.strptime(el.get('date_work_order'), '%m-%d-%y').date(),
+                service_company=ServiceCompany.objects.get(name=el.get('service_company'))
+            )
     print('Созданы записи в БД: техническое обслуживание')
 
 
@@ -201,16 +187,17 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         lst_func = [
-            create_models_machine,
-            create_models_engine,
-            create_models_transmission,
-            create_models_drive_axle,
-            create_models_steering_bridge,
-            create_models_service_company,
-            create_models_client,
-            create_machine,
+            # create_models_machine,
+            # create_models_engine,
+            # create_models_transmission,
+            # create_models_drive_axle,
+            # create_models_steering_bridge,
+            # create_models_service_company,
+            # create_models_client,
+            # create_machine,
+            #
             # create_type_mainrenance,
-            # create_maintenance,
+            create_maintenance,
             # create_recovery_method,
             # create_failure_node,
             # create_claims

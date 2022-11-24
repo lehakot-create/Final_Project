@@ -11,4 +11,8 @@ models_service_company = [
         "name": "ООО ФНС",
         "description": "ООО ФНС",
     },
+    {
+        "name": "самостоятельно",
+        "description": "самостоятельно"
+    }
 ]
