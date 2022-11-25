@@ -19,6 +19,8 @@ from .models_client import models_client
 from .models_service_company import models_service_company
 from .machine import machine
 from .models_type_maintenance import models_type_maintenance
+from .models_failure_node import models_failure_node
+from .models_recovery_method import models_recovery_method
 
 
 def create_models_machine():
@@ -118,11 +120,9 @@ def create_type_mainrenance():
 def create_maintenance():
     path = os.path.join(settings.BASE_DIR, 'Backend/management/commands')
 
-    with open(os.path.join(path, 'data.csv'), newline='', encoding='utf-8-sig') as csvfile:
+    with open(os.path.join(path, 'maintenance_data.csv'), newline='', encoding='utf-8-sig') as csvfile:
         data = csv.DictReader(csvfile)
         for el in data:
-            print(el)
-            print(el.get('factory_number_machine'))
             Maintenance.objects.create(
                 machine=Machine.objects.get(factory_number_machine=el.get('factory_number_machine')),
                 type_maintenance=TypeMaintenance.objects.get(name=el.get('type_maintenance')),
@@ -136,49 +136,41 @@ def create_maintenance():
 
 
 def create_recovery_method():
-    RecoveryMethod.objects.create(
-        name='Способ восстановления 1',
-        description='Описание способа восстановления 1'
-    )
-    RecoveryMethod.objects.create(
-        name='Способ восстановления 2',
-        description='Описание способа восстановления 2'
-    )
-    RecoveryMethod.objects.create(
-        name='Способ восстановления 3',
-        description='Описание способа восстановления 3'
-    )
+    for value in models_recovery_method:
+        RecoveryMethod.objects.create(
+            name=value.get('name'),
+            description=value.get('description')
+        )
     print('Созданы записи в БД: модели способа восстановления')
 
 
 def create_failure_node():
-    FailureNode.objects.create(
-        name='Узел отказа 1',
-        description='Описание узла отказа 1'
-    )
-    FailureNode.objects.create(
-        name='Узел отказа 2',
-        description='Описание узла отказа 2'
-    )
-    FailureNode.objects.create(
-        name='Узел отказа 3',
-        description='Описание узла отказа 3'
-    )
+    for value in models_failure_node:
+        FailureNode.objects.create(
+            name=value.get('name'),
+            description=value.get('description')
+        )
     print('Созданы записи в БД: модели узла отказа')
 
 
 def create_claims():
-    Claims.objects.create(
-        machine=Machine.objects.get(id=1),
-        date_of_rejection="2022-11-14",
-        operating_time=3000,
-        failure_node=FailureNode.objects.get(id=1),
-        description_failure="Перестал взлетать",
-        recovery_method=RecoveryMethod.objects.get(id=1),
-        used_spare_parts="Лопасти, лыжи и акваланг",
-        date_recovery="2022-11-15",
-        service_company=ServiceCompany.objects.get(id=1)
-    )
+    path = os.path.join(settings.BASE_DIR, 'Backend/management/commands')
+
+    with open(os.path.join(path, 'claims_data.csv'), newline='', encoding='utf-8-sig') as csvfile:
+        data = csv.DictReader(csvfile)
+        for el in data:
+            print(el)
+            Claims.objects.create(
+                machine=Machine.objects.get(factory_number_machine=el.get('factory_number_machine')),
+                date_of_rejection=datetime.datetime.strptime(el.get('date_of_rejection'), "%d.%m.%Y").date(),
+                operating_time=el.get('operating_time'),
+                failure_node=FailureNode.objects.get(name=el.get('failure_node')),
+                description_failure=el.get('description_failure'),
+                recovery_method=RecoveryMethod.objects.get(name=el.get('recovery_method')),
+                used_spare_parts=el.get('used_spare_parts'),
+                date_recovery=datetime.datetime.strptime(el.get('date_recovery'), "%d.%m.%Y").date(),
+                machine_downtime=el.get('machine_downtime'),
+            )
     print('Созданы записи в БД: модели рекламаций')
 
 
@@ -187,20 +179,20 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         lst_func = [
-            # create_models_machine,
-            # create_models_engine,
-            # create_models_transmission,
-            # create_models_drive_axle,
-            # create_models_steering_bridge,
-            # create_models_service_company,
-            # create_models_client,
-            # create_machine,
+            create_models_machine,
+            create_models_engine,
+            create_models_transmission,
+            create_models_drive_axle,
+            create_models_steering_bridge,
+            create_models_service_company,
+            create_models_client,
+            create_machine,
             #
-            # create_type_mainrenance,
+            create_type_mainrenance,
             create_maintenance,
-            # create_recovery_method,
-            # create_failure_node,
-            # create_claims
+            create_recovery_method,
+            create_failure_node,
+            create_claims
         ]
         for func in lst_func:
             try:
