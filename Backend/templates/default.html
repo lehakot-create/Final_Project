@@ -13,11 +13,8 @@
     <div class="px-3 py-2 text-bg-dark">
       <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-<!--          <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">-->
-<!--            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>-->
             <img class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none"
             src="{% static 'img/Logotype.jpg' %}" alt="Logotype" width="100" height="100">
-<!--          </a>-->
 
           <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
 
@@ -40,8 +37,14 @@
   </header>
 
 
-
+<!--Body-->
   <body>
+    <div class="container-fluid d-flex flex-wrap justify-content-center">
+      {% block body %}
+
+      {% endblock body %}
+    </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
   </body>

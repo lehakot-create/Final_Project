@@ -78,7 +78,7 @@ class Machine(models.Model):
     """
     Сущность Машина
     """
-    factory_number_machine = models.CharField(max_length=128, unique=True)  # Зав. № машины
+    factory_number_machine = models.CharField(max_length=128, unique=True, verbose_name='Заводской номер машины')  # Зав. № машины
     models_machine = models.ForeignKey('ModelsMachine', on_delete=models.DO_NOTHING)  # Модель техники
     models_engine = models.ForeignKey('ModelsEngine', on_delete=models.DO_NOTHING)  # Модель двигателя
     factory_number_engine = models.CharField(max_length=128)  # Зав. № двигателя
