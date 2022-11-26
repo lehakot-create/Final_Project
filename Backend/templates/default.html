@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  </head>
+
+<!--  HEADER-->
+  <header>
+    <div class="px-3 py-2 text-bg-dark">
+      <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+<!--          <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">-->
+<!--            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>-->
+            <img class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none"
+            src="{% static 'img/Logotype.jpg' %}" alt="Logotype" width="100" height="100">
+<!--          </a>-->
+
+          <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+
+            <li>
+              <p class="nav-link text-white">+7-8352-20-12-09, telegram</p>
+            </li>
+
+            <li>
+              <button type="button" class="btn btn-light text-dark me-2">Авторизация</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="px-3 py-2 border-bottom mb-3">
+      <div class="container d-flex flex-wrap justify-content-center">
+        <h2>Электронная сервисная книжка "Мой силант"</h2>
+      </div>
+    </div>
+  </header>
+
+
+
+  <body>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  </body>
+
+
+<!--Footer-->
+<div class="container">
+  <footer class="py-3 my-4">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item">
+          <p class="text-center text-muted">+7-8352-20-12-09, telegram</p>
+      </li>
+    </ul>
+    <p class="text-center text-muted">&copy; Мой Силант 2022</p>
+  </footer>
+</div>
+</html>

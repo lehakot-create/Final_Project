@@ -187,7 +187,6 @@ class Command(BaseCommand):
             create_models_service_company,
             create_models_client,
             create_machine,
-            #
             create_type_mainrenance,
             create_maintenance,
             create_recovery_method,
