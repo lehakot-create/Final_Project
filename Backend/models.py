@@ -13,6 +13,9 @@ class ModelsMachine(models.Model):
         verbose_name = 'Модель техники'
         verbose_name_plural = 'Модели техники'
 
+    def __str__(self):
+        return self.name
+
 
 class ModelsEngine(models.Model):
     """
@@ -24,6 +27,9 @@ class ModelsEngine(models.Model):
     class Meta:
         verbose_name = 'Модель двигателя'
         verbose_name_plural = 'Модели двигателя'
+
+    def __str__(self):
+        return self.name
 
 
 class ModelsTransmission(models.Model):
@@ -37,6 +43,9 @@ class ModelsTransmission(models.Model):
         verbose_name = 'Модель трансмиссии'
         verbose_name_plural = 'Модели трансмиссии'
 
+    def __str__(self):
+        return self.name
+
 
 class ModelsDriveAxle(models.Model):
     """
@@ -48,6 +57,9 @@ class ModelsDriveAxle(models.Model):
     class Meta:
         verbose_name = 'Модель ведущего моста'
         verbose_name_plural = 'Модели ведущего моста'
+
+    def __str__(self):
+        return self.name
 
 
 class ModelsSteeringBridge(models.Model):
@@ -61,6 +73,9 @@ class ModelsSteeringBridge(models.Model):
         verbose_name = 'Модель управляемого моста'
         verbose_name_plural = 'Модели управляемого моста'
 
+    def __str__(self):
+        return self.name
+
 
 class ServiceCompany(models.Model):
     """
@@ -72,6 +87,9 @@ class ServiceCompany(models.Model):
     class Meta:
         verbose_name = 'Модель сервисная компания'
         verbose_name_plural = 'Модели сервисной компании'
+
+    def __str__(self):
+        return self.name
 
 
 class Machine(models.Model):
@@ -101,6 +119,9 @@ class Machine(models.Model):
         verbose_name = 'Машина'
         verbose_name_plural = 'Машины'
 
+    def __str__(self):
+        return self.models_machine.name
+
 
 class TypeMaintenance(models.Model):
     """
@@ -112,6 +133,9 @@ class TypeMaintenance(models.Model):
     class Meta:
         verbose_name = 'Вид ТО'
         verbose_name_plural = 'Виды ТО'
+
+    def __str__(self):
+        return self.name
 
 
 class Maintenance(models.Model):
@@ -130,6 +154,9 @@ class Maintenance(models.Model):
         verbose_name = 'Техническое обслуживание'
         verbose_name_plural = 'Технические обслуживания'
 
+    def __str__(self):
+        return f'{self.machine.models_machine} - {self.type_maintenance}'
+
 
 class RecoveryMethod(models.Model):
     """
@@ -142,6 +169,9 @@ class RecoveryMethod(models.Model):
         verbose_name = 'Способ восстановления'
         verbose_name_plural = 'Способы восстановления'
 
+    def __str__(self):
+        return self.name
+
 
 class FailureNode(models.Model):
     """
@@ -153,6 +183,9 @@ class FailureNode(models.Model):
     class Meta:
         verbose_name = 'Узел отказа'
         verbose_name_plural = 'Узлы отказа'
+
+    def __str__(self):
+        return self.name
 
 
 class Claims(models.Model):
@@ -173,6 +206,9 @@ class Claims(models.Model):
     class Meta:
         verbose_name = 'Рекламации'
         verbose_name_plural = 'Рекламации'
+
+    def __str__(self):
+        return f'{self.machine.models_machine} - {self.failure_node}'
 
     # def save(self, instance, *args, **kwargs):
     #     """
