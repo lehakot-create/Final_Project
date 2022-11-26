@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from allauth.account.views import LoginView
 from django.views.generic import ListView
 
 from .filters import MachineFilter
@@ -14,3 +14,7 @@ class Index(ListView):
         context = super().get_context_data(**kwargs)
         context['filter'] = MachineFilter(self.request.GET, queryset=self.get_queryset())
         return context
+
+
+class MyLogin(LoginView):
+    template_name = 'account/login.html'
