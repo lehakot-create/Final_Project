@@ -1,6 +1,16 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, Group
 from django.db import models
 from django.conf import settings
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_user(sender, instance, created, **kwargs):
+    role_group = {'CL': 'Client', 'SC': 'Service company', 'MN': 'Manager'}
+    if created:
+        group = Group.objects.get(name=role_group.get(instance.role))
+        instance.groups.add(group)
 
 
 class User(AbstractUser):
@@ -9,9 +19,17 @@ class User(AbstractUser):
         ('SC', 'Service company'),
         ('MN', 'Manager')
     )
-    role = models.CharField(max_length=2, choices=CHOICES)
-    name = models.CharField(max_length=128, help_text='Название (только для Клиента и Сервисной компании)')
-    description = models.CharField(max_length=512, help_text='Описание (только для Клиенита и Сервисной компании)')
+    role = models.CharField(max_length=2, choices=CHOICES, default='CL', verbose_name='Роль')
+    name = models.CharField(max_length=128, null=True, blank=True,
+                            help_text='Название (только для Клиента и Сервисной компании)',
+                            verbose_name='Название')
+    description = models.CharField(max_length=512,
+                                   null=True, blank=True,
+                                   help_text='Описание (только для Клиента и Сервисной компании)',
+                                   verbose_name='Описание')
+
+    def __str__(self):
+        return f'{self.username} - {self.get_role_display()}'
 
 
 class ModelsMachine(models.Model):
