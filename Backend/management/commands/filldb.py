@@ -226,29 +226,45 @@ def add_service_company_to_group():
         service_company.groups.add(group_service_company)
 
 
+def create_group_manager():
+    group = Group.objects.create(name='Manager')
+    my_permission = Permission.objects.get(codename='view_machine')
+    group.permissions.add(my_permission)
+    my_permission = Permission.objects.get(codename='add_machine')
+    group.permissions.add(my_permission)
+    my_permission = Permission.objects.get(codename='view_maintenance')
+    group.permissions.add(my_permission)
+    my_permission = Permission.objects.get(codename='add_maintenance')
+    group.permissions.add(my_permission)
+    my_permission = Permission.objects.get(codename='view_claims')
+    group.permissions.add(my_permission)
+    my_permission = Permission.objects.get(codename='add_claims')
+    group.permissions.add(my_permission)
+
+
 class Command(BaseCommand):
     help = 'Заполняем БД'
 
     def handle(self, *args, **options):
         lst_func = [
-            # create_models_machine,
-            # create_models_engine,
-            # create_models_transmission,
-            # create_models_drive_axle,
-            # create_models_steering_bridge,
-            # create_models_client,
-            # create_models_service_company,
-            #
-            # create_machine,
-            # create_type_maintenance,
-            # create_maintenance,
-            # create_recovery_method,
-            # create_failure_node,
-            # create_claims,
-            # create_group_client,
-            # add_client_to_group,
-            # create_group_service_company,
-            # add_service_company_to_group,
+            create_models_machine,
+            create_models_engine,
+            create_models_transmission,
+            create_models_drive_axle,
+            create_models_steering_bridge,
+            create_models_client,
+            create_models_service_company,
+            create_machine,
+            create_type_maintenance,
+            create_maintenance,
+            create_recovery_method,
+            create_failure_node,
+            create_claims,
+            create_group_client,
+            add_client_to_group,
+            create_group_service_company,
+            add_service_company_to_group,
+            create_group_manager,
         ]
         for func in lst_func:
             try:

@@ -148,6 +148,7 @@ class Machine(models.Model):
     class Meta:
         verbose_name = 'Машина'
         verbose_name_plural = 'Машины'
+        ordering = ('date_of_shipment',)
 
     def __str__(self):
         return self.models_machine.name
@@ -183,6 +184,7 @@ class Maintenance(models.Model):
     class Meta:
         verbose_name = 'Техническое обслуживание'
         verbose_name_plural = 'Технические обслуживания'
+        ordering = ('date_maintenance',)
 
     def __str__(self):
         return f'{self.machine.models_machine} - {self.type_maintenance}'
@@ -236,6 +238,7 @@ class Claims(models.Model):
     class Meta:
         verbose_name = 'Рекламации'
         verbose_name_plural = 'Рекламации'
+        ordering = ('date_of_rejection',)
 
     def __str__(self):
         return f'{self.machine.models_machine} - {self.failure_node}'
