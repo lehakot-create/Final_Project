@@ -43,12 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-
     'django_filters',
     'drf_yasg',
     'rest_framework',
     'Backend',
-
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -148,3 +146,5 @@ AUTHENTICATION_BACKENDS = [
 SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
+
+AUTH_USER_MODEL = 'Backend.User'

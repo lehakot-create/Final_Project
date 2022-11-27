@@ -1,5 +1,17 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.conf import settings
+
+
+class User(AbstractUser):
+    CHOICES = (
+        ('CL', 'Client'),
+        ('SC', 'Service company'),
+        ('MN', 'Manager')
+    )
+    role = models.CharField(max_length=2, choices=CHOICES)
+    name = models.CharField(max_length=128, help_text='Название (только для Клиента и Сервисной компании)')
+    description = models.CharField(max_length=512, help_text='Описание (только для Клиенита и Сервисной компании)')
 
 
 class ModelsMachine(models.Model):
@@ -112,8 +124,8 @@ class Machine(models.Model):
     consumer = models.CharField(max_length=128)  # Грузополучатель (конечный потребитель)
     delivery_address = models.CharField(max_length=128)  # Адрес поставки (эксплуатации)
     equipment = models.CharField(max_length=512)  # Комплектация (доп. опции)
-    client = models.ForeignKey(User, on_delete=models.DO_NOTHING)  # Клиент
-    service_company = models.ForeignKey('ServiceCompany', on_delete=models.DO_NOTHING)  # Сервисная компания
+    client = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='client', on_delete=models.DO_NOTHING)  # Клиент
+    service_company = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='service_company', on_delete=models.DO_NOTHING)  # Сервисная компания
 
     class Meta:
         verbose_name = 'Машина'
@@ -148,7 +160,7 @@ class Maintenance(models.Model):
     operating_time = models.PositiveIntegerField()  # Наработка, м/час
     work_order = models.CharField(max_length=128)  # заказ-наряд
     date_work_order = models.DateField()  # дата заказ-наряда
-    service_company = models.ForeignKey('ServiceCompany', on_delete=models.DO_NOTHING)  # Сервисная компания
+    service_company = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)  # Сервисная компания
 
     class Meta:
         verbose_name = 'Техническое обслуживание'

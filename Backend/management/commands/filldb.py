@@ -5,6 +5,7 @@ import os
 from django.conf import settings
 from django.contrib.auth.models import User, Group, Permission
 from django.core.management.base import BaseCommand
+from django.contrib.auth import get_user_model
 
 from Backend.models import ModelsMachine, ModelsEngine, ModelsTransmission, \
     ModelsDriveAxle, ModelsSteeringBridge, ServiceCompany, Machine, \
@@ -69,24 +70,32 @@ def create_models_steering_bridge():
 
 
 def create_models_client():
+    User = get_user_model()
     for value in models_client:
         User.objects.create_user(
             username=value.get('username'),
-            password=value.get('password')
+            password=value.get('password'),
+            name=value.get('name'),
+            role='CL'
         )
     print('Созданы записи в БД: модели клиентов')
 
 
 def create_models_service_company():
+    User = get_user_model()
     for value in models_service_company:
-        ServiceCompany.objects.create(
+        User.objects.create_user(
+            username=value.get('username'),
+            password=value.get('password'),
             name=value.get('name'),
-            description=value.get('description')
+            description=value.get('description'),
+            role='SC'
         )
     print('Созданы записи в БД: модели сервисной компании')
 
 
 def create_machine():
+    User = get_user_model()
     for value in machine:
         Machine.objects.create(
             models_machine=ModelsMachine.objects.get(name=value.get('models_machine')),
@@ -100,16 +109,16 @@ def create_machine():
             models_steering_bridge=ModelsSteeringBridge.objects.get(name=value.get('models_steering_bridge')),
             factory_number_steering_bridge=value.get('models_drive_axle'),
             date_of_shipment=value.get('date_of_shipment'),
-            client=User.objects.get(username=value.get('client')),
+            client=User.objects.get(name=value.get('client')),
             consumer=value.get('consumer'),
             delivery_address=value.get('delivery_address'),
             equipment=value.get('equipment'),
-            service_company=ServiceCompany.objects.get(name=value.get('service_company'))
+            service_company=User.objects.get(name=value.get('service_company'))
         )
     print('Созданы записи в БД: запись о конкретной машине')
 
 
-def create_type_mainrenance():
+def create_type_maintenance():
     for value in models_type_maintenance:
         TypeMaintenance.objects.create(
             name=value.get('name'),
@@ -119,6 +128,7 @@ def create_type_mainrenance():
 
 
 def create_maintenance():
+    User = get_user_model()
     path = os.path.join(settings.BASE_DIR, 'Backend/management/commands')
 
     with open(os.path.join(path, 'maintenance_data.csv'), newline='', encoding='utf-8-sig') as csvfile:
@@ -131,7 +141,7 @@ def create_maintenance():
                 operating_time=el.get('operating_time'),
                 work_order=el.get('work_order'),
                 date_work_order=datetime.datetime.strptime(el.get('date_work_order'), '%m-%d-%y').date(),
-                service_company=ServiceCompany.objects.get(name=el.get('service_company'))
+                service_company=User.objects.get(name=el.get('service_company'))
             )
     print('Созданы записи в БД: техническое обслуживание')
 
@@ -160,7 +170,6 @@ def create_claims():
     with open(os.path.join(path, 'claims_data.csv'), newline='', encoding='utf-8-sig') as csvfile:
         data = csv.DictReader(csvfile)
         for el in data:
-            print(el)
             Claims.objects.create(
                 machine=Machine.objects.get(factory_number_machine=el.get('factory_number_machine')),
                 date_of_rejection=datetime.datetime.strptime(el.get('date_of_rejection'), "%d.%m.%Y").date(),
@@ -175,7 +184,7 @@ def create_claims():
     print('Созданы записи в БД: модели рекламаций')
 
 
-def create_groups_client():
+def create_group_client():
     group = Group.objects.create(name='Client')
     my_permission = Permission.objects.get(codename='view_machine')
     group.permissions.add(my_permission)
@@ -188,10 +197,33 @@ def create_groups_client():
 
 
 def add_client_to_group():
-    clients = User.objects.filter().exclude(is_superuser=True)
+    User = get_user_model()
+    clients = User.objects.filter(role='CL').exclude(is_superuser=True)
     group_client = Group.objects.get(name='Client')
     for client in clients:
         client.groups.add(group_client)
+
+
+def create_group_service_company():
+    group = Group.objects.create(name='Service company')
+    my_permission = Permission.objects.get(codename='view_machine')
+    group.permissions.add(my_permission)
+    my_permission = Permission.objects.get(codename='view_maintenance')
+    group.permissions.add(my_permission)
+    my_permission = Permission.objects.get(codename='add_maintenance')
+    group.permissions.add(my_permission)
+    my_permission = Permission.objects.get(codename='view_claims')
+    group.permissions.add(my_permission)
+    my_permission = Permission.objects.get(codename='add_claims')
+    group.permissions.add(my_permission)
+
+
+def add_service_company_to_group():
+    User = get_user_model()
+    service_companies = User.objects.filter(role='SC')
+    group_service_company = Group.objects.get(name='Service company')
+    for service_company in service_companies:
+        service_company.groups.add(group_service_company)
 
 
 class Command(BaseCommand):
@@ -199,21 +231,24 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         lst_func = [
-            create_models_machine,
-            create_models_engine,
-            create_models_transmission,
-            create_models_drive_axle,
-            create_models_steering_bridge,
-            create_models_service_company,
-            create_models_client,
-            create_machine,
-            create_type_mainrenance,
-            create_maintenance,
-            create_recovery_method,
-            create_failure_node,
-            create_claims,
-            create_groups_client,
-            add_client_to_group,
+            # create_models_machine,
+            # create_models_engine,
+            # create_models_transmission,
+            # create_models_drive_axle,
+            # create_models_steering_bridge,
+            # create_models_client,
+            # create_models_service_company,
+            #
+            # create_machine,
+            # create_type_maintenance,
+            # create_maintenance,
+            # create_recovery_method,
+            # create_failure_node,
+            # create_claims,
+            # create_group_client,
+            # add_client_to_group,
+            # create_group_service_company,
+            # add_service_company_to_group,
         ]
         for func in lst_func:
             try:

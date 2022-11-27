@@ -1,34 +1,42 @@
 models_client = [
     {
-        "username": 'ИП Трудников С.В.',
+        "username": 'user',
+        "name": 'ИП Трудников С.В.',
         "password": '123'
     },
     {
-        "username": 'ООО "ФПК21"',
+        "username": 'user2',
+        "name": 'ООО "ФПК21"',
         "password": '123'
     },
     {
-        "username": 'ООО "МНС77"',
+        "username": 'user3',
+        "name": 'ООО "МНС77"',
         "password": '123'
     },
     {
-        "username": 'ООО "Ранский ЛПХ"',
+        "username": 'user4',
+        "name": 'ООО "Ранский ЛПХ"',
         "password": '123'
     },
     {
-        "username": 'ООО "Комплект-Поставка"',
+        "username": 'user5',
+        "name": 'ООО "Комплект-Поставка"',
         "password": '123'
     },
     {
-        "username": 'ООО "РМК"',
+        "username": 'user6',
+        "name": 'ООО "РМК"',
         "password": '123'
     },
     {
-        "username": 'АО "Зандер"',
+        "username": 'user7',
+        "name": 'АО "Зандер"',
         "password": '123'
     },
     {
-        "username": "test",
+        "username": 'test',
+        "name": "Hello test user",
         "password": '123'
     }
 ]
