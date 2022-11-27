@@ -3,8 +3,8 @@ import datetime
 import os
 
 from django.conf import settings
-from django.contrib.auth.models import User
-from django.core.management.base import BaseCommand, CommandError
+from django.contrib.auth.models import User, Group, Permission
+from django.core.management.base import BaseCommand
 
 from Backend.models import ModelsMachine, ModelsEngine, ModelsTransmission, \
     ModelsDriveAxle, ModelsSteeringBridge, ServiceCompany, Machine, \
@@ -70,8 +70,9 @@ def create_models_steering_bridge():
 
 def create_models_client():
     for value in models_client:
-        User.objects.create(
-            username=value.get('username')
+        User.objects.create_user(
+            username=value.get('username'),
+            password=value.get('password')
         )
     print('Созданы записи в БД: модели клиентов')
 
@@ -174,6 +175,25 @@ def create_claims():
     print('Созданы записи в БД: модели рекламаций')
 
 
+def create_groups_client():
+    group = Group.objects.create(name='Client')
+    my_permission = Permission.objects.get(codename='view_machine')
+    group.permissions.add(my_permission)
+    my_permission = Permission.objects.get(codename='view_maintenance')
+    group.permissions.add(my_permission)
+    my_permission = Permission.objects.get(codename='add_maintenance')
+    group.permissions.add(my_permission)
+    my_permission = Permission.objects.get(codename='view_claims')
+    group.permissions.add(my_permission)
+
+
+def add_client_to_group():
+    clients = User.objects.filter().exclude(is_superuser=True)
+    group_client = Group.objects.get(name='Client')
+    for client in clients:
+        client.groups.add(group_client)
+
+
 class Command(BaseCommand):
     help = 'Заполняем БД'
 
@@ -191,7 +211,9 @@ class Command(BaseCommand):
             create_maintenance,
             create_recovery_method,
             create_failure_node,
-            create_claims
+            create_claims,
+            create_groups_client,
+            add_client_to_group,
         ]
         for func in lst_func:
             try:
