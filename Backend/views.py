@@ -12,10 +12,10 @@ class Index(ListView):
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
-            params = self.request.GET
-            if any([params.get('models_machine'), params.get('models_engine'), params.get('model_transmission'),
-                   params.get('models_drive_axle'), params.get('models_steering_bridge')]):
-                return Machine.objects.all()
+            # params = self.request.GET
+            # if any([params.get('models_machine'), params.get('models_engine'), params.get('model_transmission'),
+            #        params.get('models_drive_axle'), params.get('models_steering_bridge')]):
+            return Machine.objects.all()
         else:
             if self.request.GET.get('factory_number_machine'):
                 return self.queryset
