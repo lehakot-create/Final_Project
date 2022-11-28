@@ -181,7 +181,6 @@ def create_claims():
                 used_spare_parts=el.get('used_spare_parts'),
                 date_recovery=datetime.datetime.strptime(el.get('date_recovery'), "%d.%m.%Y").date(),
                 machine_downtime=el.get('machine_downtime'),
-                service_company=User.objects.get(name='ООО Силант')
             )
     print('Созданы записи в БД: модели рекламаций')
 
@@ -198,12 +197,12 @@ def create_group_client():
     group.permissions.add(my_permission)
 
 
-def add_client_to_group():
-    User = get_user_model()
-    clients = User.objects.filter(role='CL').exclude(is_superuser=True)
-    group_client = Group.objects.get(name='Client')
-    for client in clients:
-        client.groups.add(group_client)
+# def add_client_to_group():
+#     User = get_user_model()
+#     clients = User.objects.filter(role='CL').exclude(is_superuser=True)
+#     group_client = Group.objects.get(name='Client')
+#     for client in clients:
+#         client.groups.add(group_client)
 
 
 def create_group_service_company():
@@ -220,12 +219,12 @@ def create_group_service_company():
     group.permissions.add(my_permission)
 
 
-def add_service_company_to_group():
-    User = get_user_model()
-    service_companies = User.objects.filter(role='SC')
-    group_service_company = Group.objects.get(name='Service company')
-    for service_company in service_companies:
-        service_company.groups.add(group_service_company)
+# def add_service_company_to_group():
+#     User = get_user_model()
+#     service_companies = User.objects.filter(role='SC')
+#     group_service_company = Group.objects.get(name='Service company')
+#     for service_company in service_companies:
+#         service_company.groups.add(group_service_company)
 
 
 def create_group_manager():
@@ -254,7 +253,6 @@ class Command(BaseCommand):
             create_models_transmission,
             create_models_drive_axle,
             create_models_steering_bridge,
-
             create_group_client,
             create_group_service_company,
             create_group_manager,
@@ -266,11 +264,6 @@ class Command(BaseCommand):
             create_recovery_method,
             create_failure_node,
             create_claims,
-
-            # add_client_to_group,
-
-            # add_service_company_to_group,
-
         ]
         for func in lst_func:
             try:

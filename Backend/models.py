@@ -233,8 +233,6 @@ class Claims(models.Model):
     used_spare_parts = models.CharField(max_length=512)  # Используемые запасные части
     date_recovery = models.DateField()  # Дата восстановления
     machine_downtime = models.PositiveIntegerField(null=True)  # Время простоя техники
-    service_company = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING,
-                                        verbose_name='Сервисная компания')  # Сервисная компания
 
     class Meta:
         verbose_name = 'Рекламации'

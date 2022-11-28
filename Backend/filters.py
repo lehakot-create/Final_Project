@@ -32,4 +32,4 @@ class AuthClaimFilter(FilterSet):
         model = Claims
         fields = ('failure_node',
                   'recovery_method',
-                  'service_company',)
+                  'machine__service_company',)
