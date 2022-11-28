@@ -20,6 +20,7 @@
           </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
+<!--            Общая инфо-->
           <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
               <br>
               <form method="GET">
@@ -28,13 +29,41 @@
                   <input type="submit" value="Поиск"/>
               </form>
 
-              {% include 'auth_card.html' %}
+              {% if filter_auth_machine.qs|length %}
+                {% include 'auth_card_machine.html' %}
+              {% else %}
+                <p>Данные не найдены</p>
+              {% endif %}
           </div>
-          <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-              ...
+<!--            ТО-->
+          <div class="tab-pane fade " id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+             <br>
+              <form method="GET">
+                  {% csrf_token %}
+                  {{ filter_auth_maintenance.form }}
+                  <input type="submit" value="Поиск"/>
+              </form>
+
+              {% if filter_auth_maintenance.qs|length %}
+                {% include 'auth_card_maintenance.html' %}
+              {% else %}
+                <p>Данные не найдены</p>
+              {% endif %}
           </div>
+<!--            Рекламации-->
           <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
-              ...
+              <br>
+              <form method="GET">
+                  {% csrf_token %}
+                  {{ filter_auth_claim.form }}
+                  <input type="submit" value="Поиск"/>
+              </form>
+
+              {% if filter_auth_claim.qs|length %}
+                {% include 'auth_card_claim.html' %}
+              {% else %}
+                <p>Данные не найдены</p>
+              {% endif %}
           </div>
         </div>
       </div>

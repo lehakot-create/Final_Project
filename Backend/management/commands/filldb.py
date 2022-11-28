@@ -165,6 +165,7 @@ def create_failure_node():
 
 
 def create_claims():
+    User = get_user_model()
     path = os.path.join(settings.BASE_DIR, 'Backend/management/commands')
 
     with open(os.path.join(path, 'claims_data.csv'), newline='', encoding='utf-8-sig') as csvfile:
@@ -180,6 +181,7 @@ def create_claims():
                 used_spare_parts=el.get('used_spare_parts'),
                 date_recovery=datetime.datetime.strptime(el.get('date_recovery'), "%d.%m.%Y").date(),
                 machine_downtime=el.get('machine_downtime'),
+                service_company=User.objects.get(name='ООО Силант')
             )
     print('Созданы записи в БД: модели рекламаций')
 
@@ -252,6 +254,10 @@ class Command(BaseCommand):
             create_models_transmission,
             create_models_drive_axle,
             create_models_steering_bridge,
+
+            create_group_client,
+            create_group_service_company,
+            create_group_manager,
             create_models_client,
             create_models_service_company,
             create_machine,
@@ -260,11 +266,11 @@ class Command(BaseCommand):
             create_recovery_method,
             create_failure_node,
             create_claims,
-            create_group_client,
-            add_client_to_group,
-            create_group_service_company,
-            add_service_company_to_group,
-            create_group_manager,
+
+            # add_client_to_group,
+
+            # add_service_company_to_group,
+
         ]
         for func in lst_func:
             try:

@@ -1,0 +1,29 @@
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+        <th scope="col">Зав. № машины:</th>
+        <th scope="col">Вид ТО:</th>
+        <th scope="col">Дата проведения ТО:</th>
+        <th scope="col">Наработка, м/час:</th>
+        <th scope="col">Заказ-наряд:</th>
+        <th scope="col">Дата заказ-наряда:</th>
+        <th scope="col">Сервисная компания:</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for maintenance in filter_auth_maintenance.qs %}
+  <tr>
+      <td>{{ maintenance.machine.factory_number_machine}}</td>
+      <td>{{ maintenance.type_maintenance}}</td>
+      <td>{{ maintenance.date_maintenance}}</td>
+      <td>{{ maintenance.operating_time}}</td>
+      <td>{{ maintenance.work_order}}</td>
+      <td>{{ maintenance.date_work_order}}</td>
+      <td>{{ maintenance.service_company.name}}</td>
+  </tr>
+
+  {% endfor %}
+  </tbody>
+</table>

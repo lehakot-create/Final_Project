@@ -173,13 +173,13 @@ class Maintenance(models.Model):
     """
     Техническое обслуживание
     """
-    machine = models.ForeignKey('Machine', on_delete=models.DO_NOTHING)
-    type_maintenance = models.ForeignKey('TypeMaintenance', on_delete=models.DO_NOTHING)  # Вид ТО
+    machine = models.ForeignKey('Machine', on_delete=models.DO_NOTHING, verbose_name='')
+    type_maintenance = models.ForeignKey('TypeMaintenance', on_delete=models.DO_NOTHING, verbose_name='Вид ТО')  # Вид ТО
     date_maintenance = models.DateField()  # Дата проведения ТО
     operating_time = models.PositiveIntegerField()  # Наработка, м/час
     work_order = models.CharField(max_length=128)  # заказ-наряд
     date_work_order = models.DateField()  # дата заказ-наряда
-    service_company = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)  # Сервисная компания
+    service_company = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, verbose_name='Сервисная компания')  # Сервисная компания
 
     class Meta:
         verbose_name = 'Техническое обслуживание'
@@ -227,13 +227,14 @@ class Claims(models.Model):
     machine = models.ForeignKey('Machine', on_delete=models.DO_NOTHING)
     date_of_rejection = models.DateField()  # Дата отказа
     operating_time = models.PositiveIntegerField()  # Наработка, м/час
-    failure_node = models.ForeignKey('FailureNode', on_delete=models.DO_NOTHING)  # Узел отказа
+    failure_node = models.ForeignKey('FailureNode', on_delete=models.DO_NOTHING, verbose_name='Узел отказа')  # Узел отказа
     description_failure = models.CharField(max_length=128)  # Описание отказа
-    recovery_method = models.ForeignKey('RecoveryMethod', on_delete=models.DO_NOTHING)  # Способ восстановления
+    recovery_method = models.ForeignKey('RecoveryMethod', on_delete=models.DO_NOTHING, verbose_name='Способ восстановления')  # Способ восстановления
     used_spare_parts = models.CharField(max_length=512)  # Используемые запасные части
     date_recovery = models.DateField()  # Дата восстановления
     machine_downtime = models.PositiveIntegerField(null=True)  # Время простоя техники
-    service_company = models.ForeignKey('ServiceCompany', on_delete=models.DO_NOTHING, null=True)  # Сервисная компания
+    service_company = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING,
+                                        verbose_name='Сервисная компания')  # Сервисная компания
 
     class Meta:
         verbose_name = 'Рекламации'
