@@ -18,13 +18,42 @@ class Index(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.request.user.is_authenticated:
-            context['filter_auth_machine'] = AuthMachineFilter(self.request.GET,
-                                                               queryset=Machine.objects.all())
-            context['filter_auth_maintenance'] = AuthMaintenanceFilter(self.request.GET,
-                                                                       queryset=Maintenance.objects.all())
-            context['filter_auth_claim'] = AuthClaimFilter(self.request.GET,
-                                                           queryset=Claims.objects.all())
-            return context
+            if self.request.user.role == 'MN':
+                context['filter_auth_machine'] = AuthMachineFilter(self.request.GET,
+                                                                   queryset=Machine.objects.all())
+                context['filter_auth_maintenance'] = AuthMaintenanceFilter(self.request.GET,
+                                                                           queryset=Maintenance.objects.all())
+                context['filter_auth_claim'] = AuthClaimFilter(self.request.GET,
+                                                               queryset=Claims.objects.all())
+                return context
+            elif self.request.user.role == 'CL':
+                context['filter_auth_machine'] = AuthMachineFilter(self.request.GET,
+                                                                   queryset=Machine.objects.filter(
+                                                                       client=self.request.user
+                                                                   ))
+                context['filter_auth_maintenance'] = AuthMaintenanceFilter(self.request.GET,
+                                                                           queryset=Maintenance.objects.filter(
+                                                                               machine__client=self.request.user
+                                                                           ))
+                context['filter_auth_claim'] = AuthClaimFilter(self.request.GET,
+                                                               queryset=Claims.objects.filter(
+                                                                   machine__client=self.request.user
+                                                               ))
+                return context
+            elif self.request.user.role == 'SC':
+                context['filter_auth_machine'] = AuthMachineFilter(self.request.GET,
+                                                                   queryset=Machine.objects.filter(
+                                                                       service_company=self.request.user
+                                                                   ))
+                context['filter_auth_maintenance'] = AuthMaintenanceFilter(self.request.GET,
+                                                                           queryset=Maintenance.objects.filter(
+                                                                               service_company=self.request.user
+                                                                           ))
+                context['filter_auth_claim'] = AuthClaimFilter(self.request.GET,
+                                                               queryset=Claims.objects.filter(
+                                                                   machine__service_company=self.request.user
+                                                               ))
+                return context
         context['filter'] = MachineFilter(self.request.GET, queryset=self.get_queryset())
         return context
 

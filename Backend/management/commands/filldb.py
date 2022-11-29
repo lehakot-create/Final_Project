@@ -197,14 +197,6 @@ def create_group_client():
     group.permissions.add(my_permission)
 
 
-# def add_client_to_group():
-#     User = get_user_model()
-#     clients = User.objects.filter(role='CL').exclude(is_superuser=True)
-#     group_client = Group.objects.get(name='Client')
-#     for client in clients:
-#         client.groups.add(group_client)
-
-
 def create_group_service_company():
     group = Group.objects.create(name='Service company')
     my_permission = Permission.objects.get(codename='view_machine')
@@ -217,14 +209,6 @@ def create_group_service_company():
     group.permissions.add(my_permission)
     my_permission = Permission.objects.get(codename='add_claims')
     group.permissions.add(my_permission)
-
-
-# def add_service_company_to_group():
-#     User = get_user_model()
-#     service_companies = User.objects.filter(role='SC')
-#     group_service_company = Group.objects.get(name='Service company')
-#     for service_company in service_companies:
-#         service_company.groups.add(group_service_company)
 
 
 def create_group_manager():
@@ -241,6 +225,17 @@ def create_group_manager():
     group.permissions.add(my_permission)
     my_permission = Permission.objects.get(codename='add_claims')
     group.permissions.add(my_permission)
+
+
+def create_models_manager():
+    User = get_user_model()
+    User.objects.create_user(
+        username='manager',
+        password='123',
+        name='Менеджер высшего звена',
+        role='MN'
+    )
+    print('Созданы записи в БД: модели менеджера')
 
 
 class Command(BaseCommand):
@@ -264,6 +259,7 @@ class Command(BaseCommand):
             create_recovery_method,
             create_failure_node,
             create_claims,
+            create_models_manager,
         ]
         for func in lst_func:
             try:
