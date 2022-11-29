@@ -22,16 +22,28 @@
               <p class="nav-link text-white">+7-8352-20-12-09, telegram</p>
             </li>
 
+            {% if request.user.is_authenticated %}
             <li>
-              {% if request.user.is_authenticated %}
-                <a class="nav-link" href="#">Вы вошли как: {{ user.username }}</a>
-                <a class="btn btn-secondary btn-small" href="/accounts/logout/" role="button">Выйти</a>
-
+              <p>Добавить:
+              {% if request.user.role == 'CL' %}
+                <a class="btn btn-secondary btn-small" href="#" role="button">ТО</a>
+              {% elif request.user.role == 'SC' %}
+                <a class="btn btn-secondary btn-small" href="#" role="button">ТО</a>
+                <a class="btn btn-secondary btn-small" href="#" role="button">Рекламация</a>
               {% else %}
-                <a href="/accounts/login/"><button type="button" class="btn btn-light text-dark me-2">Авторизация</button></a>
+                <a class="btn btn-secondary btn-small" href="#" role="button">Машина</a>
+                <a class="btn btn-secondary btn-small" href="#" role="button">ТО</a>
+                <a class="btn btn-secondary btn-small" href="#" role="button">Рекламация</a>
               {% endif %}
-
+              </p>
             </li>
+            <li>
+              <a class="nav-link" href="#">Вы вошли как: {{ user.username }}</a>
+              <a class="btn btn-secondary btn-small" href="/accounts/logout/" role="button">Выйти</a>
+            </li>
+            {% else %}
+              <a href="/accounts/login/"><button type="button" class="btn btn-light text-dark me-2">Авторизация</button></a>
+            {% endif %}
           </ul>
         </div>
       </div>
