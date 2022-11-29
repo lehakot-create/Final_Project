@@ -1,7 +1,13 @@
 from allauth.account.views import LoginView
-from django.views.generic import ListView, DetailView
+from django.contrib import messages
+from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
+from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView
 
 from .filters import MachineFilter, AuthMachineFilter, AuthMaintenanceFilter, AuthClaimFilter
+from .forms import MachineForm
 from .models import Machine, Maintenance, Claims
 
 
@@ -72,3 +78,15 @@ class MachineDetail(DetailView):
         context['machine_maintenance'] = Maintenance.objects.filter(machine=self.kwargs.get('pk'))
         context['machine_claim'] = Claims.objects.filter(machine=self.kwargs.get('pk'))
         return context
+
+
+class CreateMachineView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
+    permission_required = ('Backend.add_machine',)
+    template_name = 'machine_create.html'
+    form_class = MachineForm
+    success_url = reverse_lazy('index')
+
+    def form_valid(self, form):
+        User = get_user_model()
+        form.instance.client = User.objects.get(id=self.request.user.id)
+        return super(CreateMachineView, self).form_valid(form)

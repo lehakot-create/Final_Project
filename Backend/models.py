@@ -129,21 +129,21 @@ class Machine(models.Model):
     factory_number_machine = models.CharField(max_length=128, unique=True, verbose_name='Заводской номер машины')  # Зав. № машины
     models_machine = models.ForeignKey('ModelsMachine', on_delete=models.DO_NOTHING, verbose_name='Модель техники')  # Модель техники
     models_engine = models.ForeignKey('ModelsEngine', on_delete=models.DO_NOTHING, verbose_name='Модель двигателя')  # Модель двигателя
-    factory_number_engine = models.CharField(max_length=128)  # Зав. № двигателя
+    factory_number_engine = models.CharField(max_length=128, verbose_name='Зав. № двигателя')  # Зав. № двигателя
     model_transmission = models.ForeignKey('ModelsTransmission', on_delete=models.DO_NOTHING, verbose_name='Модель трансмиссии')  # Модель трансмиссии
-    factory_number_transmission = models.CharField(max_length=128)  # Зав. № трансмиссии
+    factory_number_transmission = models.CharField(max_length=128, verbose_name='Зав. № трансмиссии')  # Зав. № трансмиссии
     models_drive_axle = models.ForeignKey('ModelsDriveAxle', on_delete=models.DO_NOTHING, verbose_name='Модель ведущего моста')  # Модель ведущего моста
-    factory_number_drive_axle = models.CharField(max_length=128)  # Зав. № ведущего моста
+    factory_number_drive_axle = models.CharField(max_length=128, verbose_name='Зав. № ведущего моста')  # Зав. № ведущего моста
     models_steering_bridge = models.ForeignKey('ModelsSteeringBridge',
                                                on_delete=models.DO_NOTHING, verbose_name='Модель управляемого моста')  # Модель управляемого моста
-    factory_number_steering_bridge = models.CharField(max_length=128)  # Зав. № управляемого моста
-    supply_contract = models.CharField(max_length=128)  # Договор поставки №, дата
-    date_of_shipment = models.DateField()  # Дата отгрузки с завода
-    consumer = models.CharField(max_length=128)  # Грузополучатель (конечный потребитель)
-    delivery_address = models.CharField(max_length=128)  # Адрес поставки (эксплуатации)
-    equipment = models.CharField(max_length=512)  # Комплектация (доп. опции)
-    client = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='client', on_delete=models.DO_NOTHING)  # Клиент
-    service_company = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='service_company', on_delete=models.DO_NOTHING)  # Сервисная компания
+    factory_number_steering_bridge = models.CharField(max_length=128, verbose_name='Зав. № управляемого моста')  # Зав. № управляемого моста
+    supply_contract = models.CharField(max_length=128, verbose_name='Договор поставки №, дата')  # Договор поставки №, дата
+    date_of_shipment = models.DateField(verbose_name='Дата отгрузки с завода')  # Дата отгрузки с завода
+    consumer = models.CharField(max_length=128, verbose_name='Грузополучатель (конечный потребитель)')  # Грузополучатель (конечный потребитель)
+    delivery_address = models.CharField(max_length=128, verbose_name='Адрес поставки (эксплуатации)')  # Адрес поставки (эксплуатации)
+    equipment = models.CharField(max_length=512, verbose_name='Комплектация (доп. опции)')  # Комплектация (доп. опции)
+    client = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='client', on_delete=models.DO_NOTHING, verbose_name='Клиент')  # Клиент
+    service_company = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='service_company', on_delete=models.DO_NOTHING, verbose_name='Сервисная компания')  # Сервисная компания
 
     class Meta:
         verbose_name = 'Машина'

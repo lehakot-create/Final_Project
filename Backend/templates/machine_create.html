@@ -1,0 +1,15 @@
+{% extends "default.html" %}
+
+{% block body %}
+<form method="POST">
+  {% csrf_token %}
+  <table>
+    <tr>
+      <td>
+        {{ form }}
+      </td>
+    </tr>
+  </table>
+  <input type="submit" value="Сохранить">
+</form>
+{% endblock body %}

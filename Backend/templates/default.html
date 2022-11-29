@@ -13,11 +13,10 @@
     <div class="px-3 py-2 text-bg-dark">
       <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            <img class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none"
-            src="{% static 'img/Logotype.jpg' %}" alt="Logotype" width="100" height="100">
+          <img class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none"
+               src="{% static 'img/Logotype.jpg' %}" alt="Logotype" width="100" height="100">
 
           <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-
             <li>
               <p class="nav-link text-white">+7-8352-20-12-09, telegram</p>
             </li>
@@ -31,15 +30,17 @@
                 <a class="btn btn-secondary btn-small" href="#" role="button">ТО</a>
                 <a class="btn btn-secondary btn-small" href="#" role="button">Рекламация</a>
               {% else %}
-                <a class="btn btn-secondary btn-small" href="#" role="button">Машина</a>
+                <a class="btn btn-secondary btn-small" href="{% url 'machine_create' %}" role="button">Машина</a>
                 <a class="btn btn-secondary btn-small" href="#" role="button">ТО</a>
                 <a class="btn btn-secondary btn-small" href="#" role="button">Рекламация</a>
               {% endif %}
               </p>
             </li>
             <li>
-              <a class="nav-link" href="#">Вы вошли как: {{ user.username }}</a>
-              <a class="btn btn-secondary btn-small" href="/accounts/logout/" role="button">Выйти</a>
+              <p class="nav-link">
+                Вы вошли как: {{ user.username }}
+                <a class="btn btn-secondary btn-small" href="/accounts/logout/" role="button">Выйти</a>
+              </p>
             </li>
             {% else %}
               <a href="/accounts/login/"><button type="button" class="btn btn-light text-dark me-2">Авторизация</button></a>
