@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 
 from .filters import MachineFilter, AuthMachineFilter, AuthMaintenanceFilter, AuthClaimFilter
-from .forms import MachineForm
+from .forms import MachineForm, MaintenanceForm
 from .models import Machine, Maintenance, Claims
 
 
@@ -82,7 +82,7 @@ class MachineDetail(DetailView):
 
 class CreateMachineView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
     permission_required = ('Backend.add_machine',)
-    template_name = 'machine_create.html'
+    template_name = 'create.html'
     form_class = MachineForm
     success_url = reverse_lazy('index')
 
@@ -90,3 +90,10 @@ class CreateMachineView(PermissionRequiredMixin, LoginRequiredMixin, CreateView)
         User = get_user_model()
         form.instance.client = User.objects.get(id=self.request.user.id)
         return super(CreateMachineView, self).form_valid(form)
+
+
+class CreateMaintenanceView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
+    permission_required = ('Backend.add_maintenance',)
+    template_name = 'create.html'
+    form_class = MaintenanceForm
+    success_url = reverse_lazy('index')

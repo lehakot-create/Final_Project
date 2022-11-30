@@ -25,13 +25,13 @@
             <li>
               <p>Добавить:
               {% if request.user.role == 'CL' %}
-                <a class="btn btn-secondary btn-small" href="#" role="button">ТО</a>
+                <a class="btn btn-secondary btn-small" href="{% url 'maintenance_create' %}" role="button">ТО</a>
               {% elif request.user.role == 'SC' %}
-                <a class="btn btn-secondary btn-small" href="#" role="button">ТО</a>
+                <a class="btn btn-secondary btn-small" href="{% url 'maintenance_create' %}" role="button">ТО</a>
                 <a class="btn btn-secondary btn-small" href="#" role="button">Рекламация</a>
               {% else %}
                 <a class="btn btn-secondary btn-small" href="{% url 'machine_create' %}" role="button">Машина</a>
-                <a class="btn btn-secondary btn-small" href="#" role="button">ТО</a>
+                <a class="btn btn-secondary btn-small" href="{% url 'maintenance_create' %}" role="button">ТО</a>
                 <a class="btn btn-secondary btn-small" href="#" role="button">Рекламация</a>
               {% endif %}
               </p>

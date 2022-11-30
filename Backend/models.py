@@ -29,7 +29,7 @@ class User(AbstractUser):
                                    verbose_name='Описание')
 
     def __str__(self):
-        return f'{self.username} - {self.get_role_display()}'
+        return f'{self.name} - {self.get_role_display()}'
 
 
 class ModelsMachine(models.Model):
@@ -175,10 +175,10 @@ class Maintenance(models.Model):
     """
     machine = models.ForeignKey('Machine', on_delete=models.DO_NOTHING, verbose_name='')
     type_maintenance = models.ForeignKey('TypeMaintenance', on_delete=models.DO_NOTHING, verbose_name='Вид ТО')  # Вид ТО
-    date_maintenance = models.DateField()  # Дата проведения ТО
-    operating_time = models.PositiveIntegerField()  # Наработка, м/час
-    work_order = models.CharField(max_length=128)  # заказ-наряд
-    date_work_order = models.DateField()  # дата заказ-наряда
+    date_maintenance = models.DateField(verbose_name='Дата проведения ТО')  # Дата проведения ТО
+    operating_time = models.PositiveIntegerField(verbose_name='Наработка, м/час')  # Наработка, м/час
+    work_order = models.CharField(max_length=128, verbose_name='Заказ-наряд')  # заказ-наряд
+    date_work_order = models.DateField(verbose_name='дата заказ-наряда')  # дата заказ-наряда
     service_company = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, verbose_name='Сервисная компания')  # Сервисная компания
 
     class Meta:
