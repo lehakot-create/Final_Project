@@ -173,7 +173,7 @@ class Maintenance(models.Model):
     """
     Техническое обслуживание
     """
-    machine = models.ForeignKey('Machine', on_delete=models.DO_NOTHING, verbose_name='')
+    machine = models.ForeignKey('Machine', on_delete=models.DO_NOTHING, verbose_name='Модель техники')
     type_maintenance = models.ForeignKey('TypeMaintenance', on_delete=models.DO_NOTHING, verbose_name='Вид ТО')  # Вид ТО
     date_maintenance = models.DateField(verbose_name='Дата проведения ТО')  # Дата проведения ТО
     operating_time = models.PositiveIntegerField(verbose_name='Наработка, м/час')  # Наработка, м/час
@@ -224,15 +224,15 @@ class Claims(models.Model):
     """
     Рекламации
     """
-    machine = models.ForeignKey('Machine', on_delete=models.DO_NOTHING)
-    date_of_rejection = models.DateField()  # Дата отказа
-    operating_time = models.PositiveIntegerField()  # Наработка, м/час
+    machine = models.ForeignKey('Machine', on_delete=models.DO_NOTHING, verbose_name='Модель техники')
+    date_of_rejection = models.DateField(verbose_name='Дата отказа')  # Дата отказа
+    operating_time = models.PositiveIntegerField(verbose_name='Наработка, м/час')  # Наработка, м/час
     failure_node = models.ForeignKey('FailureNode', on_delete=models.DO_NOTHING, verbose_name='Узел отказа')  # Узел отказа
-    description_failure = models.CharField(max_length=128)  # Описание отказа
+    description_failure = models.CharField(max_length=128,  verbose_name='Описание отказа')  # Описание отказа
     recovery_method = models.ForeignKey('RecoveryMethod', on_delete=models.DO_NOTHING, verbose_name='Способ восстановления')  # Способ восстановления
-    used_spare_parts = models.CharField(max_length=512)  # Используемые запасные части
-    date_recovery = models.DateField()  # Дата восстановления
-    machine_downtime = models.PositiveIntegerField(null=True)  # Время простоя техники
+    used_spare_parts = models.CharField(max_length=512, verbose_name='Используемые запасные части')  # Используемые запасные части
+    date_recovery = models.DateField(verbose_name='Дата восстановления')  # Дата восстановления
+    machine_downtime = models.PositiveIntegerField(null=True, verbose_name='Время простоя техники')  # Время простоя техники
 
     class Meta:
         verbose_name = 'Рекламации'

@@ -1,10 +1,11 @@
 from django.urls import path
 
-from .views import Index, MachineDetail, CreateMachineView, CreateMaintenanceView
+from .views import Index, MachineDetail, CreateMachineView, CreateMaintenanceView, CreateClaimView
 
 urlpatterns = [
     path('', Index.as_view(), name='index'),
     path('machine/<int:pk>/', MachineDetail.as_view(), name='machine_detail'),
     path('machine_create/', CreateMachineView.as_view(), name='machine_create'),
     path('maintenance_create/', CreateMaintenanceView.as_view(), name='maintenance_create'),
+    path('claim_create/', CreateClaimView.as_view(), name='claim_create'),
 ]

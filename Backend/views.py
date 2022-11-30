@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 
 from .filters import MachineFilter, AuthMachineFilter, AuthMaintenanceFilter, AuthClaimFilter
-from .forms import MachineForm, MaintenanceForm
+from .forms import MachineForm, MaintenanceForm, ClaimForm
 from .models import Machine, Maintenance, Claims
 
 
@@ -96,4 +96,11 @@ class CreateMaintenanceView(PermissionRequiredMixin, LoginRequiredMixin, CreateV
     permission_required = ('Backend.add_maintenance',)
     template_name = 'create.html'
     form_class = MaintenanceForm
+    success_url = reverse_lazy('index')
+
+
+class CreateClaimView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
+    permission_required = ('Backend.add_claims',)
+    template_name = 'create.html'
+    form_class = ClaimForm
     success_url = reverse_lazy('index')
