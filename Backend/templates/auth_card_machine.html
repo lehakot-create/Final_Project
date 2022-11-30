@@ -13,6 +13,13 @@
             <th scope="col">Зав. № ведущего моста:</th>
             <th scope="col">Модель управляемого моста:</th>
             <th scope="col">Зав. № управляемого моста:</th>
+            <th scope="col">Договор поставки №, дата:</th>
+            <th scope="col">Дата отгрузки с завода:</th>
+            <th scope="col">Грузополучатель (конечный потребитель):</th>
+            <th scope="col">Адрес поставки (эксплуатации):</th>
+            <th scope="col">Комплектация (доп. опции):</th>
+            <th scope="col">Клиент:</th>
+            <th scope="col">Сервисная компания:</th>
         </tr>
       </thead>
       <tbody>
@@ -55,6 +62,13 @@
               </button>
           </td>
           <td>{{ machine.factory_number_steering_bridge }}</td>
+          <td>{{ machine.supply_contract }}</td>
+          <td>{{ machine.date_of_shipment }}</td>
+          <td>{{ machine.consumer }}</td>
+          <td>{{ machine.delivery_address }}</td>
+          <td>{{ machine.equipment }}</td>
+          <td>{{ machine.client }}</td>
+          <td>{{ machine.service_company }}</td>
       </tr>
 
       {% endfor %}
