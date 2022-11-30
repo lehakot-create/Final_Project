@@ -30,7 +30,9 @@
               </form>
 
               {% if filter_auth_machine.qs|length %}
-                {% include 'auth_card_machine.html' %}
+                  <div class="container-fluid overflow-x: auto;">
+                      {% include 'auth_card_machine.html' %}
+                  </div>
               {% else %}
                 <p>Данные не найдены</p>
               {% endif %}

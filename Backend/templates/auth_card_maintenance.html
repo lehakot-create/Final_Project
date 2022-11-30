@@ -1,5 +1,5 @@
 
-
+<div class="table-responsive" style="overflow-y: hidden">
 <table class="table table-striped">
   <thead>
     <tr>
@@ -15,7 +15,7 @@
   <tbody>
   {% for maintenance in filter_auth_maintenance.qs %}
   <tr>
-      <td>{{ maintenance.machine.factory_number_machine}}</td>
+      <td><a href="{% url 'machine_detail' maintenance.machine.id %}">{{ maintenance.machine.factory_number_machine}}</a></td>
       <td>
           <button type='button' class="btn" data-bs-toggle="popover" title="{{ maintenance.type_maintenance.name }}" data-bs-content="{{ maintenance.type_maintenance.description }}">
               {{ maintenance.type_maintenance.name}}
@@ -31,3 +31,4 @@
   {% endfor %}
   </tbody>
 </table>
+</div>

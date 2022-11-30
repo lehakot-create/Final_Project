@@ -1,5 +1,5 @@
 
-
+<div class="table-responsive" style="overflow-y: hidden">
 <table class="table table-striped">
   <thead>
     <tr>
@@ -18,7 +18,8 @@
   <tbody>
   {% for claim in filter_auth_claim.qs %}
   <tr>
-      <td>{{ claim.machine.factory_number_machine}}</td>
+      <td><a href="{% url 'machine_detail' claim.machine.id %}">{{ claim.machine.factory_number_machine}}</a></td>
+
       <td>{{ claim.date_of_rejection}}</td>
       <td>{{ claim.operating_time}}</td>
       <td>
@@ -42,3 +43,4 @@
   {% endfor %}
   </tbody>
 </table>
+</div>
