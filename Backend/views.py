@@ -5,10 +5,12 @@ from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMix
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
+from rest_framework import viewsets
 
 from .filters import MachineFilter, AuthMachineFilter, AuthMaintenanceFilter, AuthClaimFilter
 from .forms import MachineForm, MaintenanceForm, ClaimForm
 from .models import Machine, Maintenance, Claims
+from .serializers import MachineSerializer, MaintenanceSerializer, ClaimsSerializer
 
 
 class Index(ListView):
@@ -104,3 +106,18 @@ class CreateClaimView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
     template_name = 'create.html'
     form_class = ClaimForm
     success_url = reverse_lazy('index')
+
+
+class MachineApiView(viewsets.ModelViewSet):
+    queryset = Machine.objects.all()
+    serializer_class = MachineSerializer
+
+
+class MaintenanceApiView(viewsets.ModelViewSet):
+    queryset = Maintenance.objects.all()
+    serializer_class = MaintenanceSerializer
+
+
+class ClaimsApiView(viewsets.ModelViewSet):
+    queryset = Claims.objects.all()
+    serializer_class = ClaimsSerializer
