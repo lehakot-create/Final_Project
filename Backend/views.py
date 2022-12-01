@@ -13,6 +13,10 @@ from .models import Machine, Maintenance, Claims
 from .serializers import MachineSerializer, MaintenanceSerializer, ClaimsSerializer
 
 
+def directory(request):
+    return render(request, 'directory.html')
+
+
 class Index(ListView):
     model = Machine
     template_name = 'first_page.html'
