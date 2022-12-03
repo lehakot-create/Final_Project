@@ -6,7 +6,9 @@ from .views import Index, MachineDetail, CreateMachineView, CreateMaintenanceVie
     ModelsTransmissionListView, ModelsDriveAxleListView, ModelsSteeringBridgeListView, TypeMaintenanceListView, \
     RecoveryMethodListView, FailureNodeListView, ModelsMachineUpdateView, ModelsEngineUpdateView, \
     ModelsTransmissionUpdateView, ModelsDriveAxleUpdateView, ModelsSteeringBridgeUpdateView, TypeMaintenanceUpdateView, \
-    RecoveryMethodUpdateView, FailureNodeUpdateView
+    RecoveryMethodUpdateView, FailureNodeUpdateView, ModelsMachineCreateView, ModelsEngineCreateView, \
+    ModelsTransmissionCreateView, ModelsDriveAxleCreateView, ModelsSteeringBridgeCreateView, TypeMaintenanceCreateView, \
+    RecoveryMethodCreateView, FailureNodeCreateView
 
 router = routers.DefaultRouter()
 router.register('machine', MachineApiView)
@@ -37,6 +39,15 @@ urlpatterns = [
     path('models_typemaintenance_update/<int:pk>/', TypeMaintenanceUpdateView.as_view(), name='models_typemaintenance_update'),
     path('models_recoverymethod_update/<int:pk>/', RecoveryMethodUpdateView.as_view(), name='models_recoverymethod_update'),
     path('models_failurenode_update/<int:pk>/', FailureNodeUpdateView.as_view(), name='models_failurenode_update'),
+
+    path('models_machine_create/', ModelsMachineCreateView.as_view(), name='models_machine_create'),
+    path('models_engine_create/', ModelsEngineCreateView.as_view(), name='models_engine_create'),
+    path('models_transmission_create/', ModelsTransmissionCreateView.as_view(), name='models_transmission_create'),
+    path('models_driveaxle_create/', ModelsDriveAxleCreateView.as_view(), name='models_driveaxle_create'),
+    path('models_steeringbridge_create/', ModelsSteeringBridgeCreateView.as_view(), name='models_steeringbridge_create'),
+    path('models_typemaintenance_create/', TypeMaintenanceCreateView.as_view(), name='models_typemaintenance_create'),
+    path('models_recoverymethod_create/', RecoveryMethodCreateView.as_view(), name='models_recoverymethod_create'),
+    path('models_failurenode_create/', FailureNodeCreateView.as_view(), name='models_failurenode_create'),
 
     path('api/v1/', include(router.urls)),
 ]

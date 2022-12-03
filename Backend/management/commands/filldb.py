@@ -213,10 +213,17 @@ def create_group_service_company():
 
 def create_group_manager():
     group = Group.objects.create(name='Manager')
-    permission_list = ('view_machine', 'add_machine', 'view_maintenance', 'add_maintenance', 'view_claims',
-                  'add_claims', 'change_modelsmachine', 'change_modelsengine', 'change_modelstransmission',
-                  'change_modelsdriveaxle', 'change_modelssteeringbridge', 'change_typemaintenance',
-                  'change_recoverymethod', 'change_failurenode',
+    permission_list = ('view_machine', 'add_machine',
+                       'view_maintenance', 'add_maintenance',
+                       'view_claims','add_claims',
+                       'change_modelsmachine', 'add_modelsmachine',
+                       'change_modelsengine', 'add_modelsengine',
+                       'change_modelstransmission', 'add_modelstransmission',
+                       'change_modelsdriveaxle', 'add_modelsdriveaxle',
+                       'change_modelssteeringbridge', 'add_modelssteeringbridge',
+                       'change_typemaintenance', 'add_typemaintenance',
+                       'change_recoverymethod', 'add_recoverymethod',
+                       'change_failurenode', 'add_failurenode',
                   )
     for permission in permission_list:
         my_permission = Permission.objects.get(codename=permission)

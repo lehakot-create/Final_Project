@@ -1,42 +1,150 @@
 
 
-<a href="{% url 'models_machine' %}" class="list-group-item list-group-item-action py-3 lh-sm">
-  <div class="d-flex w-100 align-items-center justify-content-between">
-    <strong class="mb-1">Модель техники</strong>
+<div class="row align-items-center">
+  <div class="col">
+    <a href="{% url 'models_machine' %}" class="list-group-item list-group-item-action py-3 lh-sm" style="border: 0">
+      <div class="d-flex w-100 align-items-center justify-content-between">
+          <strong class="mb-1">Модель техники</strong>
+      </div>
+    </a>
   </div>
-</a>
-<a href="{% url 'models_engine' %}" class="list-group-item list-group-item-action py-3 lh-sm">
-  <div class="d-flex w-100 align-items-center justify-content-between">
-    <strong class="mb-1">Модель двигателя</strong>
+   <div class="col-2">
+      <a class="btn btn-outline-info btn-small" href="{% url 'models_machine_create' %}" role="button">+</a>
   </div>
-</a>
-<a href="{% url 'models_transmission' %}" class="list-group-item list-group-item-action py-3 lh-sm">
-  <div class="d-flex w-100 align-items-center justify-content-between">
-    <strong class="mb-1">Модель трансмиссии</strong>
+</div>
+<div class="row align-items-center">
+  <div class="col">
+    <a href="{% url 'models_engine' %}" class="list-group-item list-group-item-action py-3 lh-sm" style="border: 0">
+      <div class="d-flex w-100 align-items-center justify-content-between">
+        <strong class="mb-1">Модель двигателя</strong>
+      </div>
+    </a>
   </div>
-</a>
-<a href="{% url 'models_driveaxle' %}" class="list-group-item list-group-item-action py-3 lh-sm">
-  <div class="d-flex w-100 align-items-center justify-content-between">
-    <strong class="mb-1">Модель ведущего моста</strong>
+   <div class="col-2">
+       <a class="btn btn-outline-info btn-small" href="{% url 'models_engine_create' %}" role="button">+</a>
   </div>
-</a>
-<a href="{% url 'models_steeringbridge' %}" class="list-group-item list-group-item-action py-3 lh-sm">
-  <div class="d-flex w-100 align-items-center justify-content-between">
-    <strong class="mb-1">Модель управляемого моста</strong>
+</div>
+<div class="row align-items-center">
+  <div class="col">
+    <a href="{% url 'models_transmission' %}" class="list-group-item list-group-item-action py-3 lh-sm" style="border: 0">
+      <div class="d-flex w-100 align-items-center justify-content-between">
+        <strong class="mb-1">Модель трансмиссии</strong>
+      </div>
+    </a>
   </div>
-</a>
-<a href="{% url 'models_typemaintenance' %}" class="list-group-item list-group-item-action py-3 lh-sm">
-  <div class="d-flex w-100 align-items-center justify-content-between">
-    <strong class="mb-1">Вид ТО</strong>
+   <div class="col-2">
+      <a class="btn btn-outline-info btn-small" href="{% url 'models_transmission_create' %}" role="button">+</a>
   </div>
-</a>
-<a href="{% url 'models_recoverymethod' %}" class="list-group-item list-group-item-action py-3 lh-sm">
-  <div class="d-flex w-100 align-items-center justify-content-between">
-    <strong class="mb-1">Способ восстановления</strong>
+</div>
+<div class="row align-items-center">
+  <div class="col">
+    <a href="{% url 'models_driveaxle' %}" class="list-group-item list-group-item-action py-3 lh-sm" style="border: 0">
+      <div class="d-flex w-100 align-items-center justify-content-between">
+        <strong class="mb-1">Модель ведущего моста</strong>
+      </div>
+    </a>
   </div>
-</a>
-<a href="{% url 'models_failurenode' %}" class="list-group-item list-group-item-action py-3 lh-sm">
-  <div class="d-flex w-100 align-items-center justify-content-between">
-    <strong class="mb-1">Узел отказа</strong>
+   <div class="col-2">
+      <a class="btn btn-outline-info btn-small" href="{% url 'models_driveaxle_create' %}" role="button">+</a>
   </div>
-</a>
+</div>
+<div class="row align-items-center">
+  <div class="col">
+    <a href="{% url 'models_steeringbridge' %}" class="list-group-item list-group-item-action py-3 lh-sm" style="border: 0">
+      <div class="d-flex w-100 align-items-center justify-content-between">
+        <strong class="mb-1">Модель управляемого моста</strong>
+      </div>
+    </a>
+  </div>
+   <div class="col-2">
+      <a class="btn btn-outline-info btn-small" href="{% url 'models_steeringbridge_create' %}" role="button">+</a>
+  </div>
+</div>
+<div class="row align-items-center">
+  <div class="col">
+    <a href="{% url 'models_typemaintenance' %}" class="list-group-item list-group-item-action py-3 lh-sm" style="border: 0">
+      <div class="d-flex w-100 align-items-center justify-content-between">
+        <strong class="mb-1">Вид ТО</strong>
+      </div>
+    </a>
+  </div>
+   <div class="col-2">
+      <a class="btn btn-outline-info btn-small" href="{% url 'models_typemaintenance_create' %}" role="button">+</a>
+  </div>
+</div>
+<div class="row align-items-center">
+  <div class="col">
+    <a href="{% url 'models_recoverymethod' %}" class="list-group-item list-group-item-action py-3 lh-sm" style="border: 0">
+      <div class="d-flex w-100 align-items-center justify-content-between">
+        <strong class="mb-1">Способ восстановления</strong>
+      </div>
+    </a>
+  </div>
+   <div class="col-2">
+      <a class="btn btn-outline-info btn-small" href="{% url 'models_recoverymethod_create' %}" role="button">+</a>
+  </div>
+</div>
+<div class="row align-items-center">
+  <div class="col">
+    <a href="{% url 'models_failurenode' %}" class="list-group-item list-group-item-action py-3 lh-sm" style="border: 0">
+      <div class="d-flex w-100 align-items-center justify-content-between">
+        <strong class="mb-1">Узел отказа</strong>
+      </div>
+    </a>
+  </div>
+   <div class="col-2">
+      <a class="btn btn-outline-info btn-small" href="{% url 'models_failurenode_create' %}" role="button">+</a>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!--<a href="{% url 'models_machine' %}" class="list-group-item list-group-item-action py-3 lh-sm">-->
+<!--  <div class="d-flex w-100 align-items-center justify-content-between">-->
+<!--      <strong class="mb-1">Модель техники</strong>-->
+<!--  </div>-->
+<!--</a>-->
+
+
+
+
+
+<!--<a href="{% url 'models_engine' %}" class="list-group-item list-group-item-action py-3 lh-sm">-->
+<!--  <div class="d-flex w-100 align-items-center justify-content-between">-->
+<!--    <strong class="mb-1">Модель двигателя</strong>-->
+<!--  </div>-->
+<!--</a>-->
+<!--<a href="{% url 'models_transmission' %}" class="list-group-item list-group-item-action py-3 lh-sm">-->
+<!--  <div class="d-flex w-100 align-items-center justify-content-between">-->
+<!--    <strong class="mb-1">Модель трансмиссии</strong>-->
+<!--  </div>-->
+<!--</a>-->
+<!--<a href="{% url 'models_driveaxle' %}" class="list-group-item list-group-item-action py-3 lh-sm">-->
+<!--  <div class="d-flex w-100 align-items-center justify-content-between">-->
+<!--    <strong class="mb-1">Модель ведущего моста</strong>-->
+<!--  </div>-->
+<!--</a>-->
+<!--<a href="{% url 'models_steeringbridge' %}" class="list-group-item list-group-item-action py-3 lh-sm">-->
+<!--  <div class="d-flex w-100 align-items-center justify-content-between">-->
+<!--    <strong class="mb-1">Модель управляемого моста</strong>-->
+<!--  </div>-->
+<!--</a>-->
+<!--<a href="{% url 'models_typemaintenance' %}" class="list-group-item list-group-item-action py-3 lh-sm">-->
+<!--  <div class="d-flex w-100 align-items-center justify-content-between">-->
+<!--    <strong class="mb-1">Вид ТО</strong>-->
+<!--  </div>-->
+<!--</a>-->
+<!--<a href="{% url 'models_recoverymethod' %}" class="list-group-item list-group-item-action py-3 lh-sm">-->
+<!--  <div class="d-flex w-100 align-items-center justify-content-between">-->
+<!--    <strong class="mb-1">Способ восстановления</strong>-->
+<!--  </div>-->
+<!--</a>-->
+<!--<a href="{% url 'models_failurenode' %}" class="list-group-item list-group-item-action py-3 lh-sm">-->
+<!--  <div class="d-flex w-100 align-items-center justify-content-between">-->
+<!--    <strong class="mb-1">Узел отказа</strong>-->
+<!--  </div>-->
+<!--</a>-->

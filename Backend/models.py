@@ -37,8 +37,8 @@ class ModelsMachine(models.Model):
     """
     Модель техники
     """
-    name = models.CharField(max_length=128)
-    description = models.CharField(max_length=512)
+    name = models.CharField(max_length=128, verbose_name='Название')
+    description = models.CharField(max_length=512, verbose_name='Описание')
 
     class Meta:
         verbose_name = 'Модель техники'
@@ -55,8 +55,8 @@ class ModelsEngine(models.Model):
     """
     Модель двигателя
     """
-    name = models.CharField(max_length=128)
-    description = models.CharField(max_length=128)
+    name = models.CharField(max_length=128, verbose_name='Название')
+    description = models.CharField(max_length=128, verbose_name='Описание')
 
     class Meta:
         verbose_name = 'Модель двигателя'
@@ -73,8 +73,8 @@ class ModelsTransmission(models.Model):
     """
     Модель трансмиссии
     """
-    name = models.CharField(max_length=128)
-    description = models.CharField(max_length=128)
+    name = models.CharField(max_length=128, verbose_name='Название')
+    description = models.CharField(max_length=128, verbose_name='Описание')
 
     class Meta:
         verbose_name = 'Модель трансмиссии'
@@ -92,8 +92,8 @@ class ModelsDriveAxle(models.Model):
     """
     Модель ведущего моста
     """
-    name = models.CharField(max_length=128)
-    description = models.CharField(max_length=128)
+    name = models.CharField(max_length=128, verbose_name='Название')
+    description = models.CharField(max_length=128, verbose_name='Описание')
 
     class Meta:
         verbose_name = 'Модель ведущего моста'
@@ -111,8 +111,8 @@ class ModelsSteeringBridge(models.Model):
     """
     Модель управляемого моста
     """
-    name = models.CharField(max_length=128)
-    description = models.CharField(max_length=128)
+    name = models.CharField(max_length=128, verbose_name='Название')
+    description = models.CharField(max_length=128, verbose_name='Описание')
 
     class Meta:
         verbose_name = 'Модель управляемого моста'
@@ -161,8 +161,8 @@ class TypeMaintenance(models.Model):
     """
     Вид ТО
     """
-    name = models.CharField(max_length=128)
-    description = models.CharField(max_length=128)
+    name = models.CharField(max_length=128, verbose_name='Название')
+    description = models.CharField(max_length=128, verbose_name='Описание')
 
     class Meta:
         verbose_name = 'Вид ТО'
@@ -201,8 +201,8 @@ class RecoveryMethod(models.Model):
     """
     Способ восстановления
     """
-    name = models.CharField(max_length=128)
-    description = models.CharField(max_length=128)
+    name = models.CharField(max_length=128, verbose_name='Название')
+    description = models.CharField(max_length=128, verbose_name='Описание')
 
     class Meta:
         verbose_name = 'Способ восстановления'
@@ -219,8 +219,8 @@ class FailureNode(models.Model):
     """
     Узел отказа
     """
-    name = models.CharField(max_length=128)
-    description = models.CharField(max_length=128)
+    name = models.CharField(max_length=128, verbose_name='Название')
+    description = models.CharField(max_length=128, verbose_name='Описание')
 
     class Meta:
         verbose_name = 'Узел отказа'
