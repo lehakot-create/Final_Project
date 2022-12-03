@@ -8,7 +8,7 @@ from django.core.management.base import BaseCommand
 from django.contrib.auth import get_user_model
 
 from Backend.models import ModelsMachine, ModelsEngine, ModelsTransmission, \
-    ModelsDriveAxle, ModelsSteeringBridge, ServiceCompany, Machine, \
+    ModelsDriveAxle, ModelsSteeringBridge, Machine, \
     TypeMaintenance, Maintenance, RecoveryMethod, FailureNode, Claims
 
 from .models_machine import models_machine
@@ -213,18 +213,14 @@ def create_group_service_company():
 
 def create_group_manager():
     group = Group.objects.create(name='Manager')
-    my_permission = Permission.objects.get(codename='view_machine')
-    group.permissions.add(my_permission)
-    my_permission = Permission.objects.get(codename='add_machine')
-    group.permissions.add(my_permission)
-    my_permission = Permission.objects.get(codename='view_maintenance')
-    group.permissions.add(my_permission)
-    my_permission = Permission.objects.get(codename='add_maintenance')
-    group.permissions.add(my_permission)
-    my_permission = Permission.objects.get(codename='view_claims')
-    group.permissions.add(my_permission)
-    my_permission = Permission.objects.get(codename='add_claims')
-    group.permissions.add(my_permission)
+    permission_list = ('view_machine', 'add_machine', 'view_maintenance', 'add_maintenance', 'view_claims',
+                  'add_claims', 'change_modelsmachine', 'change_modelsengine', 'change_modelstransmission',
+                  'change_modelsdriveaxle', 'change_modelssteeringbridge', 'change_typemaintenance',
+                  'change_recoverymethod', 'change_failurenode',
+                  )
+    for permission in permission_list:
+        my_permission = Permission.objects.get(codename=permission)
+        group.permissions.add(my_permission)
 
 
 def create_models_manager():

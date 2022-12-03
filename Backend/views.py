@@ -66,13 +66,15 @@ class Index(ListView):
         return context
 
 
-class ModelsMachineListView(ListView):
+class ModelsMachineListView(PermissionRequiredMixin, LoginRequiredMixin, ListView):
+    permission_required = ('Backend.change_modelsmachine',)
     model = ModelsMachine
     template_name = 'directory.html'
     context_object_name = 'models'
 
 
-class ModelsMachineUpdateView(UpdateView):
+class ModelsMachineUpdateView(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
+    permission_required = ('Backend.change_modelsmachine',)
     model = ModelsMachine
     template_name = 'update_models.html'
     context_object_name = 'models'
@@ -80,13 +82,15 @@ class ModelsMachineUpdateView(UpdateView):
     success_url = reverse_lazy('models_machine')
 
 
-class ModelsEngineListView(ListView):
+class ModelsEngineListView(PermissionRequiredMixin, LoginRequiredMixin, ListView):
+    permission_required = ('Backend.change_modelsengine',)
     model = ModelsEngine
     template_name = 'directory.html'
     context_object_name = 'models'
 
 
-class ModelsEngineUpdateView(UpdateView):
+class ModelsEngineUpdateView(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
+    permission_required = ('Backend.change_modelsengine',)
     model = ModelsEngine
     template_name = 'update_models.html'
     context_object_name = 'models'
@@ -94,13 +98,15 @@ class ModelsEngineUpdateView(UpdateView):
     success_url = reverse_lazy('models_engine')
 
 
-class ModelsTransmissionListView(ListView):
+class ModelsTransmissionListView(PermissionRequiredMixin, LoginRequiredMixin, ListView):
+    permission_required = ('Backend.change_modelstransmission',)
     model = ModelsTransmission
     template_name = 'directory.html'
     context_object_name = 'models'
 
 
-class ModelsTransmissionUpdateView(UpdateView):
+class ModelsTransmissionUpdateView(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
+    permission_required = ('Backend.change_modelstransmission',)
     model = ModelsTransmission
     template_name = 'update_models.html'
     context_object_name = 'models'
@@ -108,13 +114,15 @@ class ModelsTransmissionUpdateView(UpdateView):
     success_url = reverse_lazy('models_transmission')
 
 
-class ModelsDriveAxleListView(ListView):
+class ModelsDriveAxleListView(PermissionRequiredMixin, LoginRequiredMixin, ListView):
+    permission_required = ('Backend.change_modelsdriveaxle',)
     model = ModelsDriveAxle
     template_name = 'directory.html'
     context_object_name = 'models'
 
 
-class ModelsDriveAxleUpdateView(UpdateView):
+class ModelsDriveAxleUpdateView(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
+    permission_required = ('Backend.change_modelsdriveaxle',)
     model = ModelsDriveAxle
     template_name = 'update_models.html'
     context_object_name = 'models'
@@ -122,26 +130,30 @@ class ModelsDriveAxleUpdateView(UpdateView):
     success_url = reverse_lazy('models_driveaxle')
 
 
-class ModelsSteeringBridgeListView(ListView):
+class ModelsSteeringBridgeListView(PermissionRequiredMixin, LoginRequiredMixin, ListView):
+    permission_required = ('Backend.change_modelssteeringbridge',)
     model = ModelsSteeringBridge
     template_name = 'directory.html'
     context_object_name = 'models'
 
 
-class ModelsSteeringBridgeUpdateView(UpdateView):
+class ModelsSteeringBridgeUpdateView(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
+    permission_required = ('Backend.change_modelssteeringbridge',)
     model = ModelsSteeringBridge
     template_name = 'update_models.html'
     context_object_name = 'models'
     form_class = ModelsSteeringBridgeForm
     success_url = reverse_lazy('models_steeringbridge')
 
-class TypeMaintenanceListView(ListView):
+class TypeMaintenanceListView(PermissionRequiredMixin, LoginRequiredMixin, ListView):
+    permission_required = ('Backend.change_typemaintenance',)
     model = TypeMaintenance
     template_name = 'directory.html'
     context_object_name = 'models'
 
 
-class TypeMaintenanceUpdateView(UpdateView):
+class TypeMaintenanceUpdateView(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
+    permission_required = ('Backend.change_typemaintenance',)
     model = TypeMaintenance
     template_name = 'update_models.html'
     context_object_name = 'models'
@@ -149,13 +161,15 @@ class TypeMaintenanceUpdateView(UpdateView):
     success_url = reverse_lazy('models_typemaintenance')
 
 
-class RecoveryMethodListView(ListView):
+class RecoveryMethodListView(PermissionRequiredMixin, LoginRequiredMixin, ListView):
+    permission_required = ('Backend.change_recoverymethod',)
     model = RecoveryMethod
     template_name = 'directory.html'
     context_object_name = 'models'
 
 
-class RecoveryMethodUpdateView(UpdateView):
+class RecoveryMethodUpdateView(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
+    permission_required = ('Backend.change_recoverymethod',)
     model = RecoveryMethod
     template_name = 'update_models.html'
     context_object_name = 'models'
@@ -163,13 +177,15 @@ class RecoveryMethodUpdateView(UpdateView):
     success_url = reverse_lazy('models_recoverymethod')
 
 
-class FailureNodeListView(ListView):
+class FailureNodeListView(PermissionRequiredMixin, LoginRequiredMixin, ListView):
+    permission_required = ('Backend.change_failurenode',)
     model = FailureNode
     template_name = 'directory.html'
     context_object_name = 'models'
 
 
-class FailureNodeUpdateView(UpdateView):
+class FailureNodeUpdateView(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
+    permission_required = ('Backend.change_failurenode',)
     model = FailureNode
     template_name = 'update_models.html'
     context_object_name = 'models'
