@@ -9,7 +9,8 @@ from rest_framework import viewsets
 
 from .filters import MachineFilter, AuthMachineFilter, AuthMaintenanceFilter, AuthClaimFilter
 from .forms import MachineForm, MaintenanceForm, ClaimForm
-from .models import Machine, Maintenance, Claims
+from .models import Machine, Maintenance, Claims, ModelsMachine, ModelsEngine, ModelsTransmission, ModelsDriveAxle, \
+    ModelsSteeringBridge, TypeMaintenance, RecoveryMethod, FailureNode
 from .serializers import MachineSerializer, MaintenanceSerializer, ClaimsSerializer
 
 
@@ -68,6 +69,54 @@ class Index(ListView):
                 return context
         context['filter'] = MachineFilter(self.request.GET, queryset=self.get_queryset())
         return context
+
+
+class ModelsMachineListView(ListView):
+    model = ModelsMachine
+    template_name = 'directory.html'
+    context_object_name = 'models'
+
+
+class ModelsEngineListView(ListView):
+    model = ModelsEngine
+    template_name = 'directory.html'
+    context_object_name = 'models'
+
+
+class ModelsTransmissionListView(ListView):
+    model = ModelsTransmission
+    template_name = 'directory.html'
+    context_object_name = 'models'
+
+
+class ModelsDriveAxleListView(ListView):
+    model = ModelsDriveAxle
+    template_name = 'directory.html'
+    context_object_name = 'models'
+
+
+class ModelsSteeringBridgeListView(ListView):
+    model = ModelsSteeringBridge
+    template_name = 'directory.html'
+    context_object_name = 'models'
+
+
+class TypeMaintenanceListView(ListView):
+    model = TypeMaintenance
+    template_name = 'directory.html'
+    context_object_name = 'models'
+
+
+class RecoveryMethodListView(ListView):
+    model = RecoveryMethod
+    template_name = 'directory.html'
+    context_object_name = 'models'
+
+
+class FailureNodeListView(ListView):
+    model = FailureNode
+    template_name = 'directory.html'
+    context_object_name = 'models'
 
 
 class MyLogin(LoginView):

@@ -107,19 +107,19 @@ class ModelsSteeringBridge(models.Model):
         return self.name
 
 
-class ServiceCompany(models.Model):
-    """
-    Модель сервисная компания
-    """
-    name = models.CharField(max_length=128)
-    description = models.CharField(max_length=128)
-
-    class Meta:
-        verbose_name = 'Модель сервисная компания'
-        verbose_name_plural = 'Модели сервисной компании'
-
-    def __str__(self):
-        return self.name
+# class ServiceCompany(models.Model):
+#     """
+#     Модель сервисная компания
+#     """
+#     name = models.CharField(max_length=128)
+#     description = models.CharField(max_length=128)
+#
+#     class Meta:
+#         verbose_name = 'Модель сервисная компания'
+#         verbose_name_plural = 'Модели сервисной компании'
+#
+#     def __str__(self):
+#         return self.name
 
 
 class Machine(models.Model):

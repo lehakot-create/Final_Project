@@ -1,0 +1,28 @@
+
+
+<div class="table-responsive" style="height: 600px">
+    <table class="table table-striped align-middle text-center ">
+      <thead>
+        <tr>
+            <th scope="col">Наименование:</th>
+            <th scope="col">Описание:</th>
+            <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for model in models %}
+          <tr>
+              <td>
+                  {{ model.name}}
+              </td>
+              <td>
+                  {{ model.description}}
+              </td>
+              <td>
+                  <a class="btn btn-outline-info btn-small" href="#" role="button">Редактировать</a>
+              </td>
+          </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+</div>

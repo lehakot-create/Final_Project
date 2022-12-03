@@ -28,38 +28,28 @@
 
           <td><a href="{% url 'machine_detail' machine.id %}">{{ machine.factory_number_machine}}</a></td>
           <td>
-<!--              <button type='button' class="btn" data-bs-toggle="popover" title="{{ machine.models_machine.name }}" data-bs-content="{{ machine.models_machine.description }}">-->
-                  {{ machine.models_machine.name}}
-<!--              </button>-->
+              {{ machine.models_machine.name}}
           </td>
           <td>
-<!--              <button type='button' class="btn" data-bs-toggle="popover" title="{{ machine.models_engine.name }}" data-bs-content="{{ machine.models_engine.description }}">-->
-                  {{ machine.models_engine.name}}
-<!--              </button>-->
+              {{ machine.models_engine.name}}
           </td>
           <td>
               {{ machine.factory_number_engine}}
           </td>
           <td>
-<!--              <button type='button' class="btn" data-bs-toggle="popover" title="{{ machine.model_transmission.name }}" data-bs-content="{{ machine.model_transmission.description }}">-->
-                  {{ machine.model_transmission.name}}
-<!--              </button>-->
+              {{ machine.model_transmission.name}}
           </td>
           <td>
               {{ machine.factory_number_transmission}}
           </td>
           <td>
-<!--              <button type='button' class="btn" data-bs-toggle="popover" title="{{ machine.models_drive_axle.name }}" data-bs-content="{{ machine.models_drive_axle.description }}">-->
-                  {{ machine.models_drive_axle.name}}
-<!--              </button>-->
+              {{ machine.models_drive_axle.name}}
           </td>
           <td>
               {{ machine.factory_number_drive_axle}}
           </td>
           <td>
-<!--              <button type='button' class="btn" data-bs-toggle="popover" title="{{ machine.models_steering_bridge.name }}" data-bs-content="{{ machine.models_steering_bridge.description }}">-->
-                  {{ machine.models_steering_bridge.name}}
-<!--              </button>-->
+              {{ machine.models_steering_bridge.name}}
           </td>
           <td>{{ machine.factory_number_steering_bridge }}</td>
           <td>{{ machine.supply_contract }}</td>
