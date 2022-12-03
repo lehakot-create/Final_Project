@@ -1,21 +1,16 @@
 from allauth.account.views import LoginView
-from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
-from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from rest_framework import viewsets
 
 from .filters import MachineFilter, AuthMachineFilter, AuthMaintenanceFilter, AuthClaimFilter
-from .forms import MachineForm, MaintenanceForm, ClaimForm
+from .forms import MachineForm, MaintenanceForm, ClaimForm, ModelsMachineForm, ModelsEngineForm, ModelsTransmissionForm, \
+    ModelsDriveAxleForm, ModelsSteeringBridgeForm, TypeMaintenanceForm, RecoveryMethodForm, FailureNodeForm
 from .models import Machine, Maintenance, Claims, ModelsMachine, ModelsEngine, ModelsTransmission, ModelsDriveAxle, \
     ModelsSteeringBridge, TypeMaintenance, RecoveryMethod, FailureNode
 from .serializers import MachineSerializer, MaintenanceSerializer, ClaimsSerializer
-
-
-def directory(request):
-    return render(request, 'directory.html')
 
 
 class Index(ListView):
@@ -77,10 +72,26 @@ class ModelsMachineListView(ListView):
     context_object_name = 'models'
 
 
+class ModelsMachineUpdateView(UpdateView):
+    model = ModelsMachine
+    template_name = 'update_models.html'
+    context_object_name = 'models'
+    form_class = ModelsMachineForm
+    success_url = reverse_lazy('models_machine')
+
+
 class ModelsEngineListView(ListView):
     model = ModelsEngine
     template_name = 'directory.html'
     context_object_name = 'models'
+
+
+class ModelsEngineUpdateView(UpdateView):
+    model = ModelsEngine
+    template_name = 'update_models.html'
+    context_object_name = 'models'
+    form_class = ModelsEngineForm
+    success_url = reverse_lazy('models_engine')
 
 
 class ModelsTransmissionListView(ListView):
@@ -89,10 +100,26 @@ class ModelsTransmissionListView(ListView):
     context_object_name = 'models'
 
 
+class ModelsTransmissionUpdateView(UpdateView):
+    model = ModelsTransmission
+    template_name = 'update_models.html'
+    context_object_name = 'models'
+    form_class = ModelsTransmissionForm
+    success_url = reverse_lazy('models_transmission')
+
+
 class ModelsDriveAxleListView(ListView):
     model = ModelsDriveAxle
     template_name = 'directory.html'
     context_object_name = 'models'
+
+
+class ModelsDriveAxleUpdateView(UpdateView):
+    model = ModelsDriveAxle
+    template_name = 'update_models.html'
+    context_object_name = 'models'
+    form_class = ModelsDriveAxleForm
+    success_url = reverse_lazy('models_driveaxle')
 
 
 class ModelsSteeringBridgeListView(ListView):
@@ -101,10 +128,25 @@ class ModelsSteeringBridgeListView(ListView):
     context_object_name = 'models'
 
 
+class ModelsSteeringBridgeUpdateView(UpdateView):
+    model = ModelsSteeringBridge
+    template_name = 'update_models.html'
+    context_object_name = 'models'
+    form_class = ModelsSteeringBridgeForm
+    success_url = reverse_lazy('models_steeringbridge')
+
 class TypeMaintenanceListView(ListView):
     model = TypeMaintenance
     template_name = 'directory.html'
     context_object_name = 'models'
+
+
+class TypeMaintenanceUpdateView(UpdateView):
+    model = TypeMaintenance
+    template_name = 'update_models.html'
+    context_object_name = 'models'
+    form_class = TypeMaintenanceForm
+    success_url = reverse_lazy('models_typemaintenance')
 
 
 class RecoveryMethodListView(ListView):
@@ -113,10 +155,26 @@ class RecoveryMethodListView(ListView):
     context_object_name = 'models'
 
 
+class RecoveryMethodUpdateView(UpdateView):
+    model = RecoveryMethod
+    template_name = 'update_models.html'
+    context_object_name = 'models'
+    form_class = RecoveryMethodForm
+    success_url = reverse_lazy('models_recoverymethod')
+
+
 class FailureNodeListView(ListView):
     model = FailureNode
     template_name = 'directory.html'
     context_object_name = 'models'
+
+
+class FailureNodeUpdateView(UpdateView):
+    model = FailureNode
+    template_name = 'update_models.html'
+    context_object_name = 'models'
+    form_class = FailureNodeForm
+    success_url = reverse_lazy('models_failurenode')
 
 
 class MyLogin(LoginView):

@@ -19,7 +19,7 @@
                   {{ model.description}}
               </td>
               <td>
-                  <a class="btn btn-outline-info btn-small" href="#" role="button">Редактировать</a>
+                  <a class="btn btn-outline-info btn-small" href="{{ model.get_absolute_url }}" role="button">Редактировать</a>
               </td>
           </tr>
       {% endfor %}

@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.auth import get_user_model
 
-from .models import Machine, Maintenance, Claims
+from .models import Machine, Maintenance, Claims, ModelsMachine, ModelsEngine, ModelsTransmission, ModelsDriveAxle, \
+    ModelsSteeringBridge, TypeMaintenance, RecoveryMethod, FailureNode
 
 
 class MachineForm(forms.ModelForm):
@@ -51,3 +52,51 @@ class ClaimForm(forms.ModelForm):
                                                attrs={'class': 'form-control', 'placeholder': 'Select a date',
                                                       'type': 'date'})
         }
+
+
+class ModelsMachineForm(forms.ModelForm):
+    class Meta:
+        model = ModelsMachine
+        fields = '__all__'
+
+
+class ModelsEngineForm(forms.ModelForm):
+    class Meta:
+        model = ModelsEngine
+        fields = '__all__'
+
+
+class ModelsTransmissionForm(forms.ModelForm):
+    class Meta:
+        model = ModelsTransmission
+        fields = '__all__'
+
+
+class ModelsDriveAxleForm(forms.ModelForm):
+    class Meta:
+        model = ModelsDriveAxle
+        fields = '__all__'
+
+
+class ModelsSteeringBridgeForm(forms.ModelForm):
+    class Meta:
+        model = ModelsSteeringBridge
+        fields = '__all__'
+
+
+class TypeMaintenanceForm(forms.ModelForm):
+    class Meta:
+        model = TypeMaintenance
+        fields = '__all__'
+
+
+class RecoveryMethodForm(forms.ModelForm):
+    class Meta:
+        model = RecoveryMethod
+        fields = '__all__'
+
+
+class FailureNodeForm(forms.ModelForm):
+    class Meta:
+        model = FailureNode
+        fields = '__all__'

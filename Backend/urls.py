@@ -2,9 +2,11 @@ from django.urls import path, include
 from rest_framework import routers
 
 from .views import Index, MachineDetail, CreateMachineView, CreateMaintenanceView, CreateClaimView, MachineApiView, \
-    MaintenanceApiView, ClaimsApiView, directory, ModelsMachineListView, ModelsEngineListView, \
+    MaintenanceApiView, ClaimsApiView, ModelsMachineListView, ModelsEngineListView, \
     ModelsTransmissionListView, ModelsDriveAxleListView, ModelsSteeringBridgeListView, TypeMaintenanceListView, \
-    RecoveryMethodListView, FailureNodeListView
+    RecoveryMethodListView, FailureNodeListView, ModelsMachineUpdateView, ModelsEngineUpdateView, \
+    ModelsTransmissionUpdateView, ModelsDriveAxleUpdateView, ModelsSteeringBridgeUpdateView, TypeMaintenanceUpdateView, \
+    RecoveryMethodUpdateView, FailureNodeUpdateView
 
 router = routers.DefaultRouter()
 router.register('machine', MachineApiView)
@@ -26,6 +28,15 @@ urlpatterns = [
     path('models_typemaintenance/', TypeMaintenanceListView.as_view(), name='models_typemaintenance'),
     path('models_recoverymethod/', RecoveryMethodListView.as_view(), name='models_recoverymethod'),
     path('models_failurenode/', FailureNodeListView.as_view(), name='models_failurenode'),
+
+    path('models_machine/<int:pk>/', ModelsMachineUpdateView.as_view(), name='models_machine_update'),
+    path('models_engine/<int:pk>/', ModelsEngineUpdateView.as_view(), name='models_engine_update'),
+    path('models_transmission_update/<int:pk>/', ModelsTransmissionUpdateView.as_view(), name='models_transmission_update'),
+    path('models_driveaxle_update/<int:pk>/', ModelsDriveAxleUpdateView.as_view(), name='models_driveaxle_update'),
+    path('models_steeringbridge_update/<int:pk>/', ModelsSteeringBridgeUpdateView.as_view(), name='models_steeringbridge_update'),
+    path('models_typemaintenance_update/<int:pk>/', TypeMaintenanceUpdateView.as_view(), name='models_typemaintenance_update'),
+    path('models_recoverymethod_update/<int:pk>/', RecoveryMethodUpdateView.as_view(), name='models_recoverymethod_update'),
+    path('models_failurenode_update/<int:pk>/', FailureNodeUpdateView.as_view(), name='models_failurenode_update'),
 
     path('api/v1/', include(router.urls)),
 ]

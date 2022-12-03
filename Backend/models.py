@@ -3,6 +3,7 @@ from django.db import models
 from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.urls import reverse
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
@@ -46,6 +47,9 @@ class ModelsMachine(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('models_machine_update', kwargs={'pk': self.id})
+
 
 class ModelsEngine(models.Model):
     """
@@ -60,6 +64,9 @@ class ModelsEngine(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('models_engine_update', kwargs={'pk': self.id})
 
 
 class ModelsTransmission(models.Model):
@@ -76,6 +83,10 @@ class ModelsTransmission(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('models_transmission_update', kwargs={'pk': self.id})
+
+
 
 class ModelsDriveAxle(models.Model):
     """
@@ -90,6 +101,10 @@ class ModelsDriveAxle(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('models_driveaxle_update', kwargs={'pk': self.id})
+
 
 
 class ModelsSteeringBridge(models.Model):
@@ -106,20 +121,8 @@ class ModelsSteeringBridge(models.Model):
     def __str__(self):
         return self.name
 
-
-# class ServiceCompany(models.Model):
-#     """
-#     Модель сервисная компания
-#     """
-#     name = models.CharField(max_length=128)
-#     description = models.CharField(max_length=128)
-#
-#     class Meta:
-#         verbose_name = 'Модель сервисная компания'
-#         verbose_name_plural = 'Модели сервисной компании'
-#
-#     def __str__(self):
-#         return self.name
+    def get_absolute_url(self):
+        return reverse('models_steeringbridge_update', kwargs={'pk': self.id})
 
 
 class Machine(models.Model):
@@ -168,6 +171,10 @@ class TypeMaintenance(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('models_typemaintenance_update', kwargs={'pk': self.id})
+
+
 
 class Maintenance(models.Model):
     """
@@ -204,6 +211,9 @@ class RecoveryMethod(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('models_recoverymethod_update', kwargs={'pk': self.id})
+
 
 class FailureNode(models.Model):
     """
@@ -218,6 +228,9 @@ class FailureNode(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('models_failurenode_update', kwargs={'pk': self.id})
 
 
 class Claims(models.Model):
